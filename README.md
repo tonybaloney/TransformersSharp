@@ -21,10 +21,7 @@ var results = pipeline.ClassifyBatch(inputs);
 
 foreach (var result in results)
 {
-	foreach (var label in result)
-	{
-		Console.WriteLine($"Label: {label.Label}, Score: {label.Score}");
-	}
+	Console.WriteLine($"Label: {result.Label}, Score: {result.Score}");
 }
 ```
 
