@@ -36,5 +36,14 @@ namespace TransformsSharp.Tests
             Assert.Equal("NEGATIVE", results[1][0].Label);
             Assert.InRange(results[1][0].Score, 0.0, 1.0);
         }
+
+        [Fact]
+        public void Pipeline_TextGeneration()
+        {
+            var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
+            var result = pipeline.Generate("How many helicopters can a human eat in one sitting?");
+            Assert.Single(result);
+            Assert.Contains("helicopter", result[0], StringComparison.OrdinalIgnoreCase);
+        }
     }
 }
