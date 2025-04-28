@@ -37,7 +37,18 @@ Console.WriteLine(result[0]);
 
 ### Text Generation as Microsoft.Extensions.AI ChatClient
 
+```csharp
+using Microsoft.Extensions.AI;
+using TransformersSharp.MEAI;
 
+var chatClient = TextGenerationPipelineChatClient.FromModel("openai-community/gpt2", TorchDtype.BFloat16);
+var messages = new List<ChatMessage>
+{
+    new(ChatRole.System, "You are a helpful little robot."),
+    new(ChatRole.User, "how many helicopters can a human eat in one sitting?!")
+};
+var response = await chatClient.GetResponseAsync(messages);
+```
 
 ### Tokenizers from Pipelines
 
