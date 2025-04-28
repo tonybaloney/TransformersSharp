@@ -31,6 +31,27 @@ foreach (var result in results)
 using TransformersSharp;
 
 var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
-var result = pipeline.Generate("How many helicopters can a human eat in one sitting?");
+IReadOnlyList<string>? result = pipeline.Generate("How many helicopters can a human eat in one sitting?");
 Console.WriteLine(result[0]);
 ```
+
+### Tokenizers from Pipelines
+
+```csharp
+using TransformersSharp;
+
+var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
+ReadOnlySpan<long> inputIds = pipeline.Tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
+```
+
+### Tokenizers
+
+```csharp
+using TransformersSharp;
+using TransformersSharp.Tokenizers;
+
+var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
+ReadOnlySpan<long> inputIds = tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
+Console.WriteLine($"InputIds: {string.Join(", ", InputIds)}");
+```
+

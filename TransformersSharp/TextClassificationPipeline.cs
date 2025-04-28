@@ -20,14 +20,11 @@ public class TextClassificationPipeline : Pipeline
 
     public IReadOnlyList<(string Label, double Score)> Classify(string input)
     {
-        var results = RunPipeline(input);
-        return results.Select(result => (result["label"].As<string>(), result["score"].As<double>())).ToList();
+        return RunPipeline(input).Select(result => (result["label"].As<string>(), result["score"].As<double>())).ToList();
     }
 
-    public IReadOnlyList<IReadOnlyList<(string Label, double Score)>> ClassifyBatch(IReadOnlyList<string> inputs)
+    public IReadOnlyList<(string Label, double Score)> ClassifyBatch(IReadOnlyList<string> inputs)
     {
-        var results = RunPipeline(inputs);
-        return results.Select(resultList =>
-            resultList.Select(result => (result["label"].As<string>(), result["score"].As<double>())).ToList()).ToList();
+        return RunPipeline(inputs).Select(result => (result["label"].As<string>(), result["score"].As<double>())).ToList();
     }
 }

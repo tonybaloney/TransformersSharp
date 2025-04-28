@@ -1,4 +1,5 @@
 ﻿using CSnakes.Runtime.Python;
+using TransformersSharp.Tokenizers;
 
 namespace TransformersSharp
 {
@@ -19,9 +20,11 @@ namespace TransformersSharp
             return TransformerEnvironment.TransformersWrapper.CallPipeline(PipelineObject, input);
         }
 
-        internal IReadOnlyList<IReadOnlyList<IReadOnlyDictionary<string, PyObject>>> RunPipeline(IReadOnlyList<string> inputs)
+        internal IReadOnlyList<IReadOnlyDictionary<string, PyObject>> RunPipeline(IReadOnlyList<string> inputs)
         {
             return TransformerEnvironment.TransformersWrapper.CallPipelineWithList(PipelineObject, inputs);
         }
+
+        public PreTrainedTokenizerBase Tokenizer => new(PipelineObject.GetAttr("tokenizer"));
     }
 }
