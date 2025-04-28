@@ -25,6 +25,14 @@ namespace TransformersSharp
             return TransformerEnvironment.TransformersWrapper.CallPipelineWithList(PipelineObject, inputs);
         }
 
-        public PreTrainedTokenizerBase Tokenizer => new(PipelineObject.GetAttr("tokenizer"));
+        private PreTrainedTokenizerBase? _tokenizer = null;
+        public PreTrainedTokenizerBase Tokenizer
+        {
+            get
+            {
+                _tokenizer ??= new PreTrainedTokenizerBase(PipelineObject.GetAttr("tokenizer"));
+                return _tokenizer;
+            }
+        }
     }
 }
