@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TransformersSharp.MEAI\TransformersSharp.MEAI.csproj" />
     <ProjectReference Include="..\TransformersSharp\TransformersSharp.csproj" />
   </ItemGroup>
 

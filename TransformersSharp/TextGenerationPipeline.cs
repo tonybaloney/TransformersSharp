@@ -23,4 +23,10 @@ public class TextGenerationPipeline : Pipeline
         var results = RunPipeline(input);
         return results.Select(result => result["generated_text"].As<string>()).ToList();
     }
+
+    public IReadOnlyList<string> Generate(IReadOnlyList<IReadOnlyDictionary<string, string>> messages, long? maxLength = null, long? maxNewTokens = null, long? minLength = null, long? minNewTokens = null, IReadOnlyList<string>? stopStrings = null, double temperature = 1, long topk = 50, double topp = 1, double? minp = null)
+    {
+        var results = TransformerEnvironment.TransformersWrapper.TextGenerationPipeline(this.PipelineObject, messages, maxLength, maxNewTokens, minLength, minNewTokens, stopStrings, temperature, topk, topp, minp);
+        return results.Select(result => result["generated_text"].As<string>()).ToList();
+    }
 }

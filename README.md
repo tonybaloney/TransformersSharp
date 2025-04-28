@@ -35,6 +35,10 @@ IReadOnlyList<string>? result = pipeline.Generate("How many helicopters can a hu
 Console.WriteLine(result[0]);
 ```
 
+### Text Generation as Microsoft.Extensions.AI ChatClient
+
+
+
 ### Tokenizers from Pipelines
 
 ```csharp

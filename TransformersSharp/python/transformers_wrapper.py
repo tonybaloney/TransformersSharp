@@ -1,5 +1,5 @@
 ﻿from typing import Any, Optional
-from transformers import pipeline as TransformersPipeline, Pipeline
+from transformers import pipeline as TransformersPipeline, Pipeline, TextGenerationPipeline
 from huggingface_hub import login
 import torch
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
@@ -13,6 +13,20 @@ def pipeline(task: Optional[str] = None, model: Optional[str] = None, tokenizer:
             torch_dtype = getattr(torch, torch_dtype.lower())
     return TransformersPipeline(task=task, model=model, tokenizer=tokenizer, torch_dtype=torch_dtype, device=device)
 
+
+def text_generation_pipeline(pipeline: TextGenerationPipeline, 
+                             messages: list[dict[str, str]],
+                             max_length: Optional[int] = None,
+                             max_new_tokens: Optional[int] = None,
+                             min_length: Optional[int] = None,
+                             min_new_tokens: Optional[int] = None,
+                             stop_strings: Optional[list[str]] = None,
+                             temperature: Optional[float] = 1.0,
+                             top_k: Optional[int] = 50,
+                             top_p: Optional[float] = 1.0,
+                             min_p: Optional[float] = None,
+                            ) -> list[dict[str, Any]]:
+    return pipeline(messages, max_length=max_length, max_new_tokens=max_new_tokens, min_length=min_length, min_new_tokens=min_new_tokens, stop=stop_strings, temperature=temperature, top_k=top_k, top_p=top_p, min_p=min_p)
 
 def huggingface_login(token: str) -> None:
     login(token=token)
