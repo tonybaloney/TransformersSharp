@@ -55,7 +55,13 @@ public class PreTrainedTokenizerBase : Tokenizer
 
     public override OperationStatus Decode(IEnumerable<int> ids, Span<char> destination, out int idsConsumed, out int charsWritten)
     {
-		string result = TransformerEnvironment.TransformersWrapper.TokenizerDecode(TokenizerObject, [.. ids.Select(i => (long)i)]);
+		string result = TransformerEnvironment.TransformersWrapper.TokenizerDecode(TokenizerObject, [.. ids.Select(i => (long)i)], skipSpecialTokens: true);
+		if (result.Length > destination.Length)
+		{
+			idsConsumed = 0;
+			charsWritten = 0;
+			return OperationStatus.DestinationTooSmall;
+		}
 		result.CopyTo(destination);
 		idsConsumed = ids.Count();
 		charsWritten = result.Length;

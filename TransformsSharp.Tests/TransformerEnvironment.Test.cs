@@ -92,9 +92,7 @@ namespace TransformsSharp.Tests
             Assert.NotNull(tokens);
             Assert.NotEmpty(tokens);
             Assert.Null(normalizedText);
-            Span<char> destination = new char[input.Length];
-            tokenizer.Decode(tokens.Select(t => t.Id), destination, out int idsConsumed, out int charsWritten);
-            string decodedText = new(destination[..charsWritten]);
+            string decodedText = tokenizer.Decode(tokens.Select(et => et.Id));
             Assert.Equal(input, decodedText);
         }
     }
