@@ -76,11 +76,12 @@ namespace TransformsSharp.Tests
             Assert.NotNull(tokens);
             Assert.NotEmpty(tokens);
             Assert.Null(normalizedText);
+
             Assert.Equal(6179, tokens[1].Id);
             Assert.Equal("How", tokens[1].Value);
 
-            Assert.Equal("?", tokens.Last().Value);
-            Assert.Equal(2, tokens.Last().Id);
+            Assert.Equal("?", tokens[tokens.Count - 1].Value);
+            Assert.Equal(116, tokens[tokens.Count - 1].Id);
         }
     }
 }
