@@ -41,12 +41,11 @@ public class TextGenerationPipelineChatClient : IChatClient
                     { "role", message.Role.Value },
                     { "content", message.Text }
                 }).ToList(),
-                maxNewTokens: options?.MaxOutputTokens
-                // TODO : Wait for new release to fix nullable optional parameters
-                //topk: options?.TopK as int?,
-                //topp: options?.TopP,
-                //temperature: options?.Temperature,
-                //stopStrings: options?.StopSequences
+                maxNewTokens: options?.MaxOutputTokens,
+                topk: options?.TopK,
+                topp: options?.TopP,
+                temperature: options?.Temperature,
+                stopStrings: options?.StopSequences?.AsReadOnly()
                 );
             var responseMessages = result.Select(message => new ChatMessage(GetChatRole(message["role"]), message["content"])).ToList();
             return new ChatResponse(responseMessages);
