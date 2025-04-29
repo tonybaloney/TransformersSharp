@@ -6,17 +6,29 @@ public class TextGenerationPipelineChatClient : IChatClient
 {
     public TextGenerationPipeline TextGenerationPipeline { get; private set; }
 
-    public static TextGenerationPipelineChatClient FromModel(string model, TorchDtype? torchDtype = null, string? device = null)
+    public static TextGenerationPipelineChatClient FromModel(string model, TorchDtype? torchDtype = null, string? device = null, bool trustRemoteCode = false)
     {
         return new TextGenerationPipelineChatClient
         {
-            TextGenerationPipeline = TextGenerationPipeline.FromModel(model, torchDtype, device)
+            TextGenerationPipeline = TextGenerationPipeline.FromModel(model, torchDtype, device, trustRemoteCode: trustRemoteCode)
         };
     }
 
     public void Dispose()
     {
         // Nothing to do yet.
+    }
+
+    private static ChatRole GetChatRole(string role)
+    {
+        return role switch
+        {
+            "user" => ChatRole.User,
+            "assistant" => ChatRole.Assistant,
+            "system" => ChatRole.System,
+            "tool" => ChatRole.Tool,
+            _ => throw new ArgumentException($"Unknown chat role: {role}")
+        };
     }
 
     public Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
@@ -28,9 +40,15 @@ public class TextGenerationPipelineChatClient : IChatClient
                 {
                     { "role", message.Role.Value },
                     { "content", message.Text }
-                }).ToList());
-
-            var responseMessages = result.Select(text => new ChatMessage(ChatRole.Assistant, text)).ToList();
+                }).ToList(),
+                maxNewTokens: options?.MaxOutputTokens
+                // TODO : Wait for new release to fix nullable optional parameters
+                //topk: options?.TopK as int?,
+                //topp: options?.TopP,
+                //temperature: options?.Temperature,
+                //stopStrings: options?.StopSequences
+                );
+            var responseMessages = result.Select(message => new ChatMessage(GetChatRole(message["role"]), message["content"])).ToList();
             return new ChatResponse(responseMessages);
         }, cancellationToken);
     }

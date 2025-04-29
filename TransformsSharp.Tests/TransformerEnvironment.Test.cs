@@ -44,7 +44,7 @@ namespace TransformsSharp.Tests
             var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
             var result = pipeline.Generate("How many helicopters can a human eat in one sitting?");
             Assert.Single(result);
-            Assert.Contains("helicopter", result[0], StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("helicopter", result.First(), StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
