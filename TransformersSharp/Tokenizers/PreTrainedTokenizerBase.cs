@@ -1,3 +1,4 @@
+using CSnakes.Runtime;
 using CSnakes.Runtime.Python;
 using Microsoft.ML.Tokenizers;
 using System.Buffers;
@@ -33,13 +34,15 @@ public class PreTrainedTokenizerBase : Tokenizer
 
 		// TODO: Encode settings?
 
-		var (inputIds, mappingPairs) = TransformerEnvironment.TransformersWrapper.TokenizerTextWithOffsets(TokenizerObject, text);
+		var (inputIdsBuffer, mappingPairsBuffer) = TransformerEnvironment.TransformersWrapper.TokenizerTextWithOffsets(TokenizerObject, text);
 		List<EncodedToken> tokens = [];
+		var inputIds = inputIdsBuffer.AsInt64ReadOnlySpan();
+		var mappingPairs = mappingPairsBuffer.AsInt64ReadOnlySpan2D();
 
-		for (int i = 0; i < inputIds.Count; i++)
+		for (int i = 0; i < inputIds.Length; i++)
 		{
-			int start = (int)mappingPairs[i].Item1;
-			int end = (int)mappingPairs[i].Item2;
+			int start = (int)mappingPairs[i, 0];
+			int end = (int)mappingPairs[i, 1];
 			var token = new EncodedToken((int)inputIds[i], text[start..end], new Range(new Index(start), new Index(end)));
 			tokens.Add(token);
 		}
@@ -52,7 +55,11 @@ public class PreTrainedTokenizerBase : Tokenizer
 
     public override OperationStatus Decode(IEnumerable<int> ids, Span<char> destination, out int idsConsumed, out int charsWritten)
     {
-        throw new NotImplementedException();
+		string result = TransformerEnvironment.TransformersWrapper.TokenizerDecode(TokenizerObject, [.. ids.Select(i => (long)i)]);
+		result.CopyTo(destination);
+		idsConsumed = ids.Count();
+		charsWritten = result.Length;
+		return OperationStatus.Done;
     }
 	#endregion
 }

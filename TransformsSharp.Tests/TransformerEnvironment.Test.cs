@@ -82,5 +82,20 @@ namespace TransformsSharp.Tests
             Assert.Equal("?", tokens[tokens.Count - 1].Value);
             Assert.Equal(116, tokens[tokens.Count - 1].Id);
         }
+
+        [Fact]
+        public void Tokenizer_Decode()
+        {
+            var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
+            var input = "How many helicopters can a human eat in one sitting?";
+            var tokens = tokenizer.EncodeToTokens(input, out string? normalizedText);
+            Assert.NotNull(tokens);
+            Assert.NotEmpty(tokens);
+            Assert.Null(normalizedText);
+            Span<char> destination = new char[input.Length];
+            tokenizer.Decode(tokens.Select(t => t.Id), destination, out int idsConsumed, out int charsWritten);
+            string decodedText = new(destination[..charsWritten]);
+            Assert.Equal(input, decodedText);
+        }
     }
 }

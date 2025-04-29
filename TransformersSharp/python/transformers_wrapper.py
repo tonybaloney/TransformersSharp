@@ -63,15 +63,15 @@ def tokenize_text_with_attention(tokenizer: PreTrainedTokenizerBase, text: str) 
     result = tokenizer(text)
     return result['input_ids'], result['attention_mask']
 
-def tokenizer_text_as_ndarray(tokenizer: PreTrainedTokenizerBase, text: str, **kwargs) -> Buffer:
+def tokenizer_text_as_ndarray(tokenizer: PreTrainedTokenizerBase, text: str) -> Buffer:
     result = tokenizer(text, return_tensors='np', return_attention_mask=False)
     return result['input_ids'][0]
 
-def tokenizer_text_with_offsets(tokenizer: PreTrainedTokenizerBase, text: str) -> tuple[list[int], list[tuple[int, int]]]:
-    result = tokenizer(text, return_offsets_mapping=True, return_attention_mask=False)
+def tokenizer_text_with_offsets(tokenizer: PreTrainedTokenizerBase, text: str) -> tuple[Buffer, Buffer]:
+    result = tokenizer(text, return_tensors='np', return_offsets_mapping=True, return_attention_mask=False)
     input_ids = result['input_ids']
     offsets = result['offset_mapping']
-    return input_ids, offsets
+    return input_ids[0], offsets[0]
 
 def tokenizer_decode(tokenizer: PreTrainedTokenizerBase, input_ids: list[int], skip_special_tokens: bool = False,
                      clean_up_tokenization_spaces: Optional[bool] = None) -> str:

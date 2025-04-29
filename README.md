@@ -2,7 +2,7 @@
 
 A little wrapper for Hugging Face Transformers in C#.
 
-Created using 
+Created using [CSnakes](https://github.com/tonybaloney/CSnakes)
 
 This package will fetch Python, PyTorch, and Hugging Face Transformers automatically, so you don't need to install them manually.
 
