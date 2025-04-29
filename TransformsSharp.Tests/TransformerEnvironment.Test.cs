@@ -86,7 +86,7 @@ namespace TransformsSharp.Tests
         [Fact]
         public void Tokenizer_Decode()
         {
-            var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
+            var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m", addSpecialTokens: false);
             var input = "How many helicopters can a human eat in one sitting?";
             var tokens = tokenizer.EncodeToTokens(input, out string? normalizedText);
             Assert.NotNull(tokens);

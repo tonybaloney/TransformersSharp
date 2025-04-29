@@ -1,4 +1,3 @@
-using CSnakes.Runtime;
 using CSnakes.Runtime.Python;
 using Microsoft.ML.Tokenizers;
 using System.Buffers;
@@ -9,15 +8,17 @@ namespace TransformersSharp.Tokenizers;
 public class PreTrainedTokenizerBase : Tokenizer
 {
 	internal PyObject TokenizerObject { get; }
+	private bool addSpecialTokens;
 
-	internal PreTrainedTokenizerBase(PyObject tokenizerObject)
+	internal PreTrainedTokenizerBase(PyObject tokenizerObject, bool addSpecialTokens = true)
 	{
 		TokenizerObject = tokenizerObject;
+		this.addSpecialTokens = addSpecialTokens;
 	}
 
-	public static PreTrainedTokenizerBase FromPretrained(string model, string? cacheDir = null, bool forceDownload = false, string revision = "main", bool trustRemoteCode = false)
+	public static PreTrainedTokenizerBase FromPretrained(string model, string? cacheDir = null, bool forceDownload = false, string revision = "main", bool trustRemoteCode = false, bool addSpecialTokens = true)
 	{
-		return new PreTrainedTokenizerBase(TransformerEnvironment.TransformersWrapper.TokenizerFromPretrained(model, cacheDir, forceDownload, revision, trustRemoteCode));
+		return new PreTrainedTokenizerBase(TransformerEnvironment.TransformersWrapper.TokenizerFromPretrained(model, cacheDir, forceDownload, revision, trustRemoteCode), addSpecialTokens);
 	}
 
 	public ReadOnlySpan<long> Tokenize(string text)
@@ -32,9 +33,7 @@ public class PreTrainedTokenizerBase : Tokenizer
 		// Our API only supports string input
 		text ??= textSpan.ToString();
 
-		// TODO: Encode settings?
-
-		var (inputIdsBuffer, mappingPairsBuffer) = TransformerEnvironment.TransformersWrapper.TokenizerTextWithOffsets(TokenizerObject, text);
+		var (inputIdsBuffer, mappingPairsBuffer) = TransformerEnvironment.TransformersWrapper.TokenizerTextWithOffsets(TokenizerObject, text, addSpecialTokens: addSpecialTokens);
 		List<EncodedToken> tokens = [];
 		var inputIds = inputIdsBuffer.AsInt64ReadOnlySpan();
 		var mappingPairs = mappingPairsBuffer.AsInt64ReadOnlySpan2D();
@@ -55,7 +54,7 @@ public class PreTrainedTokenizerBase : Tokenizer
 
     public override OperationStatus Decode(IEnumerable<int> ids, Span<char> destination, out int idsConsumed, out int charsWritten)
     {
-		string result = TransformerEnvironment.TransformersWrapper.TokenizerDecode(TokenizerObject, [.. ids.Select(i => (long)i)], skipSpecialTokens: true);
+		string result = TransformerEnvironment.TransformersWrapper.TokenizerDecode(TokenizerObject, [.. ids.Select(i => (long)i)], skipSpecialTokens: addSpecialTokens);
 		if (result.Length > destination.Length)
 		{
 			idsConsumed = 0;
