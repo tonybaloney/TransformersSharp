@@ -1,3 +1,4 @@
+using Microsoft.ML.Tokenizers;
 using TransformersSharp;
 using TransformersSharp.Tokenizers;
 
@@ -63,6 +64,23 @@ namespace TransformsSharp.Tests
             var InputIds = tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
             Assert.Equal(12, InputIds.Length);
             Assert.Equal(2, InputIds[0]);
+        }
+
+
+        [Fact]
+        public void Tokenizer_Encode()
+        {
+            var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
+            var input = "How many helicopters can a human eat in one sitting?";
+            var tokens = tokenizer.EncodeToTokens(input, out string? normalizedText);
+            Assert.NotNull(tokens);
+            Assert.NotEmpty(tokens);
+            Assert.Null(normalizedText);
+            Assert.Equal(6179, tokens[1].Id);
+            Assert.Equal("How", tokens[1].Value);
+
+            Assert.Equal("?", tokens.Last().Value);
+            Assert.Equal(2, tokens.Last().Id);
         }
     }
 }

@@ -14,7 +14,7 @@ public class TransformerSharpMEAITests
             new(ChatRole.System, "You are a helpful little robot."),
             new(ChatRole.User, "how many helicopters can a human eat in one sitting?!")
         };
-        var response = await chatClient.GetResponseAsync(messages, new ChatOptions { Temperature = 0.7f });
+        var response = await chatClient.GetResponseAsync(messages, new() { Temperature = 0.7f });
         
         Assert.NotNull(response);
         Assert.Contains("helicopter", response.Text, StringComparison.OrdinalIgnoreCase);

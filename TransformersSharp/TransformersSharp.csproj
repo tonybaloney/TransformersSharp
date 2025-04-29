@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="CSnakes.Runtime" Version="1.0.31" />
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="TransformersSharp.MEAI"/>
+		<InternalsVisibleTo Include="TransformersSharp.MEAI" />
 	</ItemGroup>
 	
 </Project>
