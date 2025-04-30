@@ -14,6 +14,7 @@ Based on the task, the `Pipeline` class should be inherited, some examples inclu
 
 - [Text Generation (`TextGenerationPipeline`)](text_generation.md)
 - [Text Classification (`TextClassificationPipeline)](text_classification.md)
+- [Image Classification (`ImageClassificationPipeline`)](image_classification.md)
 
 ## Accessing the Tokenizer
 

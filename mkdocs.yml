@@ -7,6 +7,7 @@ nav:
     - Introduction: pipelines/index.md
     - Text Classification: pipelines/text_classification.md
     - Text Generation: pipelines/text_generation.md
+    - Image Classification: pipelines/image_classification.md
 
 
 plugins:
