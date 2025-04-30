@@ -12,9 +12,10 @@ The `Pipeline` base class in `TransformersSharp` provides methods to run pre-tra
 
 Based on the task, the `Pipeline` class should be inherited, some examples include
 
-- [Text Generation (`TextGenerationPipeline`)](text_generation.md)
-- [Text Classification (`TextClassificationPipeline)](text_classification.md)
-- [Image Classification (`ImageClassificationPipeline`)](image_classification.md)
+- [Text Generation Pipeline (`TextGenerationPipeline`)](text_generation.md)
+- [Text Classification Pipeline (`TextClassificationPipeline)](text_classification.md)
+- [Image Classification Pipeline(`ImageClassificationPipeline`)](image_classification.md)
+- [Object Detection Pipeline (`ObjectDetectionPipeline`)](object_detection.md)
 
 ## Accessing the Tokenizer
 

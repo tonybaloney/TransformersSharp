@@ -10,6 +10,8 @@ This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes)
 
 - Tokenizer API based on [`PreTrainedTokenizerBase`](https://huggingface.co/docs/transformers/v4.51.3/en/internal/tokenization_utils#transformers.PreTrainedTokenizerBase)
 - Tokenizer shim to the [Microsoft.ML.Tokenizers](https://learn.microsoft.com/dotnet/api/microsoft.ml.tokenizers.tokenizer?view=ml-dotnet-preview) base class
-- Generic Pipeline Factory
-- TextGenerationPipeline Factory
-- TextClassificationPipeline Factory
+- [Generic Pipeline Factory](pipelines/index.md)
+- [Text Generation Pipeline (`TextGenerationPipeline`)](pipelines/text_generation.md)
+- [Text Classification Pipeline (`TextClassificationPipeline)](pipelines/text_classification.md)
+- [Image Classification Pipeline(`ImageClassificationPipeline`)](pipelines/image_classification.md)
+- [Object Detection Pipeline (`ObjectDetectionPipeline`)](pipelines/object_detection.md)
