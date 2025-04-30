@@ -1,6 +1,6 @@
 # TransformersSharp
 
-![Logo](docs/media/logo.png)
+![Logo](media/logo.png)
 
 A little wrapper for Hugging Face Transformers in C#. This is not a comprehensive 1:1 mapping of the whole HuggingFace [transformers](https://pypi.org/transformers) package, because the API is enormous.
 
