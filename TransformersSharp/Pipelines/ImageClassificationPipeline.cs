@@ -1,7 +1,7 @@
 ﻿using CSnakes.Runtime.Python;
 using TransformersSharp.Models;
 
-namespace TransformersSharp;
+namespace TransformersSharp.Pipelines;
 
 public class ImageClassificationPipeline : Pipeline
 {

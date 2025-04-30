@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.AI;
+using TransformersSharp.Pipelines;
 
 namespace TransformersSharp.MEAI;
 
@@ -19,18 +20,6 @@ public class TextGenerationPipelineChatClient : IChatClient
         // Nothing to do yet.
     }
 
-    private static ChatRole GetChatRole(string role)
-    {
-        return role switch
-        {
-            "user" => ChatRole.User,
-            "assistant" => ChatRole.Assistant,
-            "system" => ChatRole.System,
-            "tool" => ChatRole.Tool,
-            _ => throw new ArgumentException($"Unknown chat role: {role}")
-        };
-    }
-
     public Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
         return Task.Run(() =>
@@ -47,7 +36,7 @@ public class TextGenerationPipelineChatClient : IChatClient
                 temperature: options?.Temperature,
                 stopStrings: options?.StopSequences?.AsReadOnly()
                 );
-            var responseMessages = result.Select(message => new ChatMessage(GetChatRole(message["role"]), message["content"])).ToList();
+            var responseMessages = result.Select(message => new ChatMessage(new ChatRole(message["role"]), message["content"])).ToList();
             return new ChatResponse(responseMessages);
         }, cancellationToken);
     }

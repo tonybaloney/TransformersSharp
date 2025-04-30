@@ -1,6 +1,6 @@
 ﻿using CSnakes.Runtime.Python;
 
-namespace TransformersSharp;
+namespace TransformersSharp.Pipelines;
 
 public class TextClassificationPipeline : Pipeline
 {

@@ -1,6 +1,7 @@
 ﻿using CSnakes.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TransformersSharp.Pipelines;
 
 namespace TransformersSharp
 {

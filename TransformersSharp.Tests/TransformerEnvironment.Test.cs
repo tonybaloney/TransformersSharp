@@ -1,3 +1,4 @@
+using TransformersSharp.Pipelines;
 using TransformersSharp.Tokenizers;
 
 namespace TransformersSharp.Tests
