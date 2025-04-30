@@ -43,7 +43,7 @@ theme:
         icon: material/brightness-7
         name: Switch to light mode
 
-
+repo_url: https://github.com/tonybaloney/TransformersSharp
 markdown_extensions:
   - toc:
       permalink: true
@@ -55,5 +55,11 @@ markdown_extensions:
         alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
   - attr_list
   - md_in_html
