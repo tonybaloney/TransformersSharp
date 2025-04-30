@@ -5,11 +5,13 @@ The `TransformersSharp.TextClassificationPipeline` class provides a high-level i
 ## What is a Text Classification Pipeline?
 
 A text classification pipeline is designed to classify input text into predefined categories. It is commonly used for tasks like:
+
 - Sentiment analysis
 - Topic classification
 - Spam detection
 
 ### Key Features of Text Classification Pipelines:
+
 - **Pre-trained Models**: Leverages state-of-the-art models like BERT, DistilBERT, and others.
 - **Batch Processing**: Supports single and batch inputs for efficient processing.
 - **Confidence Scores**: Provides confidence scores for each classification label.

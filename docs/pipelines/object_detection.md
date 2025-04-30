@@ -5,6 +5,7 @@ The `TransformersSharp.ObjectDetectionPipeline` class provides a high-level inte
 ## What is an Object Detection Pipeline?
 
 An object detection pipeline is designed to identify and locate objects within an image. It provides both the labels of detected objects and their bounding boxes. Common use cases include:
+
 - Autonomous vehicles
 - Surveillance systems
 - Image annotation

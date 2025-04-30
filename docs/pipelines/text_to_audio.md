@@ -5,11 +5,13 @@ The `TransformersSharp.TextToAudioPipeline` class provides a high-level interfac
 ## What is a Text to Audio Pipeline?
 
 A text-to-audio pipeline is designed to generate audio representations of input text. It is commonly used for tasks like:
+
 - Text-to-speech (TTS) systems
 - Audio content generation
 - Assistive technologies
 
 ### Key Features of Text to Audio Pipelines:
+
 - **Pre-trained Models**: Leverages state-of-the-art models like Bark and others.
 - **High-Quality Audio**: Generates audio with high fidelity and naturalness.
 - **Customizable Parameters**: Allows fine-tuning of generation parameters.
