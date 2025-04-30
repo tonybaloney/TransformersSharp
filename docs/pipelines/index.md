@@ -8,65 +8,12 @@ A pipeline is a high-level abstraction that simplifies the process of using pre-
 
 ## Using the Pipeline Class
 
-The `Pipeline` class in `TransformersSharp` provides methods to run pre-trained models on input data. The 
+The `Pipeline` base class in `TransformersSharp` provides methods to run pre-trained models on input data.
 
-### Running a Single Input
+Based on the task, the `Pipeline` class should be inherited, some examples include
 
-```csharp
-using TransformersSharp;
-
-var pipeline = new Pipeline(pipelineObject); // Assume pipelineObject is initialized
-var result = pipeline.RunPipeline("How many helicopters can a human eat in one sitting?");
-foreach (var output in result)
-{
-    foreach (var kvp in output)
-    {
-        Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-    }
-}
-```
-
-**Equivalent Python Code:**
-
-```python
-from transformers import pipeline
-
-pipeline = pipeline("text-classification", model="facebook/opt-125m")
-result = pipeline("How many helicopters can a human eat in one sitting?")
-for output in result:
-    for key, value in output.items():
-        print(f"{key}: {value}")
-```
-
-### Running Batch Inputs
-
-```csharp
-using TransformersSharp;
-
-var pipeline = new Pipeline(pipelineObject); // Assume pipelineObject is initialized
-var inputs = new List<string> { "Input 1", "Input 2", "Input 3" };
-var results = pipeline.RunPipeline(inputs);
-foreach (var result in results)
-{
-    foreach (var kvp in result)
-    {
-        Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-    }
-}
-```
-
-**Equivalent Python Code:**
-
-```python
-from transformers import pipeline
-
-pipeline = pipeline("text-classification", model="facebook/opt-125m")
-inputs = ["Input 1", "Input 2", "Input 3"]
-results = pipeline(inputs)
-for result in results:
-    for key, value in result.items():
-        print(f"{key}: {value}")
-```
+- [Text Generation (`TextGenerationPipeline`)](text_generation.md)
+- [Text Classification (`TextClassificationPipeline)](text_classification.md)
 
 ## Accessing the Tokenizer
 
