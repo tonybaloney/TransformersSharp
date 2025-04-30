@@ -1,10 +1,11 @@
-﻿from typing import Any, Generator, Optional
+﻿from email.mime import image
+from typing import Any, Generator, Optional
 from transformers import pipeline as TransformersPipeline, Pipeline, TextGenerationPipeline
 from huggingface_hub import login
 import torch
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
 from collections.abc import Buffer
-
+from PIL import Image
 
 def pipeline(task: Optional[str] = None, model: Optional[str] = None, tokenizer: Optional[str] = None, torch_dtype: Optional[str] = None, device: Optional[str] = None, trust_remote_code: bool = False):
     """
@@ -113,5 +114,20 @@ def invoke_image_classification_pipeline(pipeline: Pipeline,
     """
     Invoke an image classification pipeline.
     """
+    r = pipeline(image, top_k=top_k, timeout=timeout, function_to_apply=function_to_apply)
+    return r
+
+def invoke_image_classification_from_bytes(pipeline: Pipeline, 
+                             data: bytes,
+                             width: int,
+                             height: int,
+                             pixel_mode: str,
+                             function_to_apply: Optional[str] = None,
+                             top_k: Optional[int] = 5,
+                             timeout: Optional[float] = None) -> list[dict[str, Any]]:
+    """
+    Invoke an image classification pipeline.
+    """
+    image = Image.frombytes(pixel_mode, (width, height), data)
     r = pipeline(image, top_k=top_k, timeout=timeout, function_to_apply=function_to_apply)
     return r
