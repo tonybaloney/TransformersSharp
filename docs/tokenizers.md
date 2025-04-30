@@ -26,6 +26,16 @@ var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
 ReadOnlySpan<long> inputIds = pipeline.Tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
 ```
 
+**Equivalent Python Code:**
+
+```python
+from transformers import pipeline
+
+pipeline = pipeline("text-generation", model="facebook/opt-125m")
+input_ids = pipeline.tokenizer("How many helicopters can a human eat in one sitting?", return_tensors="pt")["input_ids"]
+print(input_ids.tolist())
+```
+
 ## Tokenizers from Models
 
 ```csharp
@@ -34,7 +44,17 @@ using TransformersSharp.Tokenizers;
 
 var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
 ReadOnlySpan<long> inputIds = tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
-Console.WriteLine($"InputIds: {string.Join(", ", InputIds)}");
+Console.WriteLine($"InputIds: {string.Join(", ", inputIds.ToArray())}");
+```
+
+**Equivalent Python Code:**
+
+```python
+from transformers import PreTrainedTokenizerBase
+
+tokenizer = PreTrainedTokenizerBase.from_pretrained("facebook/opt-125m")
+input_ids = tokenizer("How many helicopters can a human eat in one sitting?", return_tensors="pt")["input_ids"]
+print(input_ids.tolist())
 ```
 
 ## Tokenizers as Microsoft.ML.Tokenizers
@@ -58,9 +78,8 @@ You can also decode token IDs back into text using the `Decode` method:
 ```csharp
 var tokenizer = PreTrainedTokenizerBase.FromPretrained("facebook/opt-125m");
 var tokenIds = new List<int> { 101, 2009, 2003, 1037, 2204, 2154, 102 };
-Span<char> decodedText = stackalloc char[100];
-tokenizer.Decode(tokenIds, decodedText, out int idsConsumed, out int charsWritten);
-Console.WriteLine(new string(decodedText.Slice(0, charsWritten)));
+string decodedText = tokenizer.Decode(tokenIds);
+Console.WriteLine(decodedText);
 ```
 
 ## Special Tokens and Their Usage
