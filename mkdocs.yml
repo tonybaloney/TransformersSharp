@@ -1,0 +1,59 @@
+site_name: TransformersSharp
+
+nav:
+  - Introduction: index.md
+  - Tokenizers: tokenizers.md
+  - Pipelines:
+    - Introduction: pipelines/index.md
+    - Text Classification: pipelines/text_classification.md
+    - Text Generation: pipelines/text_generation.md
+
+
+plugins:
+  - glightbox
+  - include-markdown
+
+theme:
+  name: material
+  logo: media/logo.png
+  # favicon: media/favicon.png
+  features:
+    - navigation.instant
+    - navigation.footer
+    - content.code.copy
+    - navigation.tabs.sticky 
+    - content.tabs.link
+
+  # Change Font: https://squidfunk.github.io/mkdocs-material/setup/changing-the-fonts/?h=fonts
+  # Google Fonts Supported By Default: https://fonts.google.com/
+  font:
+    code: Fira Mono #Monospaced
+    text: Montserrat #Regular
+  palette:
+    - scheme: default  # Light Mode
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/brightness-2
+        name: Switch to dark mode
+    - scheme: slate # Dark Mode
+      primary: amber
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+        alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - md_in_html

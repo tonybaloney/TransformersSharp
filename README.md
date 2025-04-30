@@ -1,11 +1,18 @@
 # TransformersSharp
 
-A little wrapper for Hugging Face Transformers in C#.
+A little wrapper for Hugging Face Transformers in C#. This is not a comprehensive 1:1 mapping of the whole HuggingFace [transformers](https://pypi.org/transformers) package, because the API is enormous.
 
-Created using [CSnakes](https://github.com/tonybaloney/CSnakes)
+If you need a specific feature, toggle or pipeline API clone this repo and make adjustments.
 
-This package will fetch Python, PyTorch, and Hugging Face Transformers automatically, so you don't need to install them manually.
+This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes) and will fetch Python, PyTorch, and Hugging Face Transformers automatically, so you don't need to install them manually.
 
+## Features
+
+- Tokenizer API based on [`PreTrainedTokenizerBase`](https://huggingface.co/docs/transformers/v4.51.3/en/internal/tokenization_utils#transformers.PreTrainedTokenizerBase)
+- Tokenizer shim to the [Microsoft.ML.Tokenizers](https://learn.microsoft.com/dotnet/api/microsoft.ml.tokenizers.tokenizer?view=ml-dotnet-preview) base class
+- Generic Pipeline Factory
+- TextGenerationPipeline Factory
+- TextClassificationPipeline Factory
 
 ## Usage
 
