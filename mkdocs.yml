@@ -8,6 +8,7 @@ nav:
     - Text Classification: pipelines/text_classification.md
     - Text Generation: pipelines/text_generation.md
     - Image Classification: pipelines/image_classification.md
+    - Object Detection: pipelines/object_detection.md
 
 
 plugins:
