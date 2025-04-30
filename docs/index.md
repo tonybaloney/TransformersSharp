@@ -14,7 +14,7 @@ This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes)
 - Tokenizer shim to the [Microsoft.ML.Tokenizers](https://learn.microsoft.com/dotnet/api/microsoft.ml.tokenizers.tokenizer?view=ml-dotnet-preview) base class
 - [Generic Pipeline Factory](pipelines/index.md)
 - [Text Generation Pipeline (`TextGenerationPipeline`)](pipelines/text_generation.md)
-- [Text Classification Pipeline (`TextClassificationPipeline)](pipelines/text_classification.md)
+- [Text Classification Pipeline (`TextClassificationPipeline`)](pipelines/text_classification.md)
 - [Image Classification Pipeline(`ImageClassificationPipeline`)](pipelines/image_classification.md)
 - [Object Detection Pipeline (`ObjectDetectionPipeline`)](pipelines/object_detection.md)
 - [Text to Audio Pipeline (`TextToAudioPipeline`)](pipelines/text_to_audio.md)
