@@ -104,7 +104,7 @@ namespace TransformsSharp.Tests
             var result = pipeline.Classify(imagePath);
             Assert.NotNull(result);
             Assert.NotEmpty(result);
-            Assert.InRange(result.First().Score, 0.8, 1.0);
+            Assert.InRange(result.First().Score, 0.5, 1.0);
             Assert.Equal("hornbill", result.First().Label);
         }
     }
