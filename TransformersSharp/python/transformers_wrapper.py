@@ -135,12 +135,13 @@ def invoke_image_classification_from_bytes(pipeline: Pipeline,
 def invoke_object_detection_pipeline(pipeline: Pipeline, 
                              image: str,
                              threshold: float = 0.5,
-                             timeout: Optional[float] = None) -> list[dict[str, Any]]:
+                             timeout: Optional[float] = None) -> Generator[tuple[str, float, tuple[int, int, int, int]], None, None]:
     """
     Invoke an object detection pipeline.
     """
-    r = pipeline(image, threshold=threshold, timeout=timeout)
-    return r
+    return ((r["label"], r["score"], ((box := r["box"])["xmin"], box["ymin"], box["xmax"], box["ymax"]))
+            for r in pipeline(image, threshold=threshold, timeout=timeout))
+
 
 
 def invoke_text_to_audio_pipeline(pipeline: Pipeline, 
