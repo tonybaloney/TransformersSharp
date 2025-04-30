@@ -107,5 +107,21 @@ namespace TransformsSharp.Tests
             Assert.InRange(result.First().Score, 0.5, 1.0);
             Assert.Equal("hornbill", result.First().Label);
         }
+
+        [Fact]
+        public void ObjectDetectionPipeline_DetectUrl()
+        {
+            var pipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
+            var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
+            var result = pipeline.Detect(imagePath);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.InRange(result.First().Score, 0.5, 1.0);
+            Assert.Equal("parrot", result.First().Label);
+            Assert.InRange(result.First().Box.XMin, 0, 224);
+            Assert.InRange(result.First().Box.YMin, 0, 224);
+            Assert.InRange(result.First().Box.XMax, 0, 224);
+            Assert.InRange(result.First().Box.YMax, 0, 224);
+        }
     }
 }

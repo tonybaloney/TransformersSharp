@@ -48,7 +48,7 @@ public class ImageClassificationPipeline : Pipeline
     /// <param name="topk">Number of top results to return</param>
     /// <param name="timeout">Optional timeout for the classification process</param>
     /// <returns>Enumerable of classification results</returns>
-    public IEnumerable<ClassificationResult> Classify(ImageData image, string? functionToApply = null, long? topk = null, double? timeout = null)
+    public IEnumerable<ClassificationResult> Classify(ImageData image, string? functionToApply = null, int topk = 5, double? timeout = null)
     {
         byte[] imageBytes = image.ImageBytes;
         string pixelMode = image.PixelMode switch

@@ -123,11 +123,21 @@ def invoke_image_classification_from_bytes(pipeline: Pipeline,
                              height: int,
                              pixel_mode: str,
                              function_to_apply: Optional[str] = None,
-                             top_k: Optional[int] = 5,
+                             top_k: int = 5,
                              timeout: Optional[float] = None) -> list[dict[str, Any]]:
     """
     Invoke an image classification pipeline.
     """
     image = Image.frombytes(pixel_mode, (width, height), data)
     r = pipeline(image, top_k=top_k, timeout=timeout, function_to_apply=function_to_apply)
+    return r
+
+def invoke_object_detection_pipeline(pipeline: Pipeline, 
+                             image: str,
+                             threshold: float = 0.5,
+                             timeout: Optional[float] = None) -> list[dict[str, Any]]:
+    """
+    Invoke an object detection pipeline.
+    """
+    r = pipeline(image, threshold=threshold, timeout=timeout)
     return r
