@@ -23,7 +23,7 @@ The `ObjectDetectionPipeline` class in `TransformersSharp` provides methods to d
 ### Detecting Objects in a Single Image
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
@@ -50,7 +50,7 @@ for item in results:
 ### Customizing Detection Parameters
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
@@ -88,7 +88,7 @@ The `Detect` method allows users to customize the detection process by specifyin
 ### Example: Customizing Parameters
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path

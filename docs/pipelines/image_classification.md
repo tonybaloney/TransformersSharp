@@ -23,7 +23,7 @@ The `ImageClassificationPipeline` class in `TransformersSharp` provides methods 
 ### Classifying a Single Image
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ImageClassificationPipeline.FromModel("google/mobilenet_v2_1.0_224");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Can be a local path
@@ -49,7 +49,7 @@ for item in results:
 ### Classifying with Custom Parameters
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ImageClassificationPipeline.FromModel("google/mobilenet_v2_1.0_224");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
@@ -87,7 +87,7 @@ The `Classify` method allows users to customize the classification process by sp
 ### Example: Customizing Parameters
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = ImageClassificationPipeline.FromModel("google/mobilenet_v2_1.0_224");
 var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
