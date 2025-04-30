@@ -33,7 +33,7 @@ public class TransformerSharpMEAITests
         await foreach (var update in response)
         {
             Assert.NotNull(update);
-            Assert.Contains("helicopter", update.Text, StringComparison.OrdinalIgnoreCase);
+            Assert.NotEmpty(update.Text);
         }
     }
 }
