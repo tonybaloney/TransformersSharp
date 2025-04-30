@@ -16,6 +16,7 @@ Based on the task, the `Pipeline` class should be inherited, some examples inclu
 - [Text Classification Pipeline (`TextClassificationPipeline)](text_classification.md)
 - [Image Classification Pipeline(`ImageClassificationPipeline`)](image_classification.md)
 - [Object Detection Pipeline (`ObjectDetectionPipeline`)](object_detection.md)
+- [Text to Audio Pipeline (`TextToAudioPipeline`)](text_to_audio.md)
 
 ## Accessing the Tokenizer
 

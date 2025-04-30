@@ -5,12 +5,14 @@ The `TransformersSharp.TextGenerationPipeline` class provides a high-level inter
 ## What is a Text Generation Pipeline?
 
 A text generation pipeline is designed to generate coherent and contextually relevant text based on a given input prompt. It is commonly used for tasks like:
+
 - Autocompletion
 - Story generation
 - Chatbot responses
 - Creative writing
 
 ### Key Features of Text Generation Pipelines:
+
 - **Pre-trained Models**: Leverages state-of-the-art models like GPT, OPT, and others.
 - **Customizable Parameters**: Allows fine-tuning of generation parameters like maximum length, temperature, and top-k sampling.
 - **Batch Processing**: Supports single and batch inputs for efficient processing.
@@ -104,6 +106,7 @@ print(input_ids.tolist())
 ## Customizing Text Generation
 
 The `Generate` method allows users to customize text generation by specifying parameters like:
+
 - **`maxLength`**: The maximum length of the generated text.
 - **`temperature`**: Controls the randomness of predictions by scaling the logits before applying softmax.
 - **`topk`**: Limits the sampling pool to the top-k tokens.

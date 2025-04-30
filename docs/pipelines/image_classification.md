@@ -5,11 +5,13 @@ The `TransformersSharp.ImageClassificationPipeline` class provides a high-level 
 ## What is an Image Classification Pipeline?
 
 An image classification pipeline is designed to classify input images into predefined categories. It is commonly used for tasks like:
+
 - Object recognition
 - Scene classification
 - Image tagging
 
 ### Key Features of Image Classification Pipelines:
+
 - **Pre-trained Models**: Leverages state-of-the-art models like MobileNet, ResNet, and others.
 - **Top-k Results**: Returns the top-k classification results with confidence scores.
 - **Flexible Input**: Supports both local image files and URLs.
@@ -77,6 +79,7 @@ The `ImageClassificationPipeline` class does not use a tokenizer, as it is desig
 ## Customizing Image Classification
 
 The `Classify` method allows users to customize the classification process by specifying parameters like:
+
 - **`functionToApply`**: Specifies the function to apply to the model's output (e.g., "softmax", "sigmoid", or "none").
 - **`topk`**: Limits the number of top results to return.
 - **`timeout`**: Sets a timeout for the classification process.
