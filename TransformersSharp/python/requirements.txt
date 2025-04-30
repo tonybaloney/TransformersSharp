@@ -1,2 +1,3 @@
 ﻿transformers
 torch
+pillow

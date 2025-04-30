@@ -95,5 +95,17 @@ namespace TransformsSharp.Tests
             string decodedText = tokenizer.Decode(tokens.Select(et => et.Id));
             Assert.Equal(input, decodedText);
         }
+
+        [Fact]
+        public void ImageClassificationPipeline_ClassifyUrl()
+        {
+            var pipeline = ImageClassificationPipeline.FromModel("google/mobilenet_v2_1.0_224");
+            var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
+            var result = pipeline.Classify(imagePath);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.InRange(result.First().Score, 0.8, 1.0);
+            Assert.Equal("hornbill", result.First().Label);
+        }
     }
 }

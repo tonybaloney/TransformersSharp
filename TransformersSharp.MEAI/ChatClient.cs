@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.AI;
+using System.ComponentModel;
 
 namespace TransformersSharp.MEAI;
 
@@ -59,6 +60,6 @@ public class TextGenerationPipelineChatClient : IChatClient
 
     public IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+         throw new NotImplementedException(); 
     }
 }

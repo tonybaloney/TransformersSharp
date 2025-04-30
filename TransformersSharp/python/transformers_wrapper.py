@@ -1,4 +1,4 @@
-﻿from typing import Any, Optional
+﻿from typing import Any, Generator, Optional
 from transformers import pipeline as TransformersPipeline, Pipeline, TextGenerationPipeline
 from huggingface_hub import login
 import torch
@@ -77,3 +77,41 @@ def tokenizer_decode(tokenizer: PreTrainedTokenizerBase, input_ids: list[int], s
                      clean_up_tokenization_spaces: Optional[bool] = None) -> str:
     decoded = tokenizer.decode(input_ids, skip_special_tokens=skip_special_tokens, clean_up_tokenization_spaces=clean_up_tokenization_spaces)
     return decoded
+
+
+def stream_text_generation_pipeline_with_template(pipeline: TextGenerationPipeline, 
+                             messages: list[dict[str, str]],
+                             max_length: Optional[int] = None,
+                             max_new_tokens: Optional[int] = None,
+                             min_length: Optional[int] = None,
+                             min_new_tokens: Optional[int] = None,
+                             stop_strings: Optional[list[str]] = None,
+                             temperature: Optional[float] = 1.0,
+                             top_k: Optional[int] = 50,
+                             top_p: Optional[float] = 1.0,
+                             min_p: Optional[float] = None,
+                            ) -> Generator[dict[str, str], None, None]:
+    """
+    Invoke a text generation pipeline with a chat template.
+    Use pytorch for intermediate tensors (template -> generate)
+    """
+    # Apply template to messages
+    r = pipeline(messages, max_length=max_length, max_new_tokens=max_new_tokens, min_length=min_length, 
+                 min_new_tokens=min_new_tokens, stop=stop_strings, temperature=temperature, top_k=top_k, 
+                 top_p=top_p, min_p=min_p)
+
+    # TODO : stream messages
+    for message in r[0]['generated_text']:
+        yield message
+
+
+def invoke_image_classification_pipeline(pipeline: Pipeline, 
+                             image: str,
+                             function_to_apply: Optional[str] = None,
+                             top_k: Optional[int] = 5,
+                             timeout: Optional[float] = None) -> list[dict[str, Any]]:
+    """
+    Invoke an image classification pipeline.
+    """
+    r = pipeline(image, top_k=top_k, timeout=timeout, function_to_apply=function_to_apply)
+    return r

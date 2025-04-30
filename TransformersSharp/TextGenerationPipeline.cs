@@ -30,4 +30,10 @@ public class TextGenerationPipeline : Pipeline
         var results = TransformerEnvironment.TransformersWrapper.InvokeTextGenerationPipelineWithTemplate(PipelineObject, messages, maxLength, maxNewTokens, minLength, minNewTokens, stopStrings, temperature, topk, topp, minp);
         return results;
     }
+
+    public IEnumerator<IReadOnlyDictionary<string, string>> Stream(IReadOnlyList<IReadOnlyDictionary<string, string>> messages, long? maxLength = null, long? maxNewTokens = null, long? minLength = null, long? minNewTokens = null, IReadOnlyList<string>? stopStrings = null, double? temperature = 1, long? topk = 50, double? topp = 1, double? minp = null)
+    {
+        var results = TransformerEnvironment.TransformersWrapper.StreamTextGenerationPipelineWithTemplate(PipelineObject, messages, maxLength, maxNewTokens, minLength, minNewTokens, stopStrings, temperature, topk, topp, minp);
+        return results.GetEnumerator();
+    }
 }
