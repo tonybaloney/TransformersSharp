@@ -79,6 +79,7 @@ The `ImageClassificationPipeline` class does not use a tokenizer, as it is desig
 ## Customizing Image Classification
 
 The `Classify` method allows users to customize the classification process by specifying parameters like:
+
 - **`functionToApply`**: Specifies the function to apply to the model's output (e.g., "softmax", "sigmoid", or "none").
 - **`topk`**: Limits the number of top results to return.
 - **`timeout`**: Sets a timeout for the classification process.

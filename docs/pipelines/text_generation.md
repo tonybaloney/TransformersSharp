@@ -106,6 +106,7 @@ print(input_ids.tolist())
 ## Customizing Text Generation
 
 The `Generate` method allows users to customize text generation by specifying parameters like:
+
 - **`maxLength`**: The maximum length of the generated text.
 - **`temperature`**: Controls the randomness of predictions by scaling the logits before applying softmax.
 - **`topk`**: Limits the sampling pool to the top-k tokens.

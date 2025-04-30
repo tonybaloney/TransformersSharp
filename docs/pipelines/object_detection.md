@@ -81,6 +81,7 @@ The `ObjectDetectionPipeline` class does not use a tokenizer, as it is designed 
 ## Customizing Object Detection
 
 The `Detect` method allows users to customize the detection process by specifying parameters like:
+
 - **`threshold`**: Sets the confidence threshold for detected objects.
 - **`timeout`**: Sets a timeout for the detection process.
 
