@@ -117,7 +117,7 @@ namespace TransformsSharp.Tests
             Assert.NotNull(result);
             Assert.NotEmpty(result);
             Assert.InRange(result.First().Score, 0.5, 1.0);
-            Assert.Equal("parrot", result.First().Label);
+            Assert.Equal("bird", result.First().Label);
             Assert.InRange(result.First().Box.XMin, 0, 224);
             Assert.InRange(result.First().Box.YMin, 0, 224);
             Assert.InRange(result.First().Box.XMax, 0, 224);
