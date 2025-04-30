@@ -141,3 +141,15 @@ def invoke_object_detection_pipeline(pipeline: Pipeline,
     """
     r = pipeline(image, threshold=threshold, timeout=timeout)
     return r
+
+
+def invoke_text_to_audio_pipeline(pipeline: Pipeline, 
+                             text: str,
+                             generate_kwargs: Optional[dict[str, Any]] = None) -> tuple[Buffer, int]:
+    """
+    Invoke a text-to-audio pipeline.
+    """
+    if not generate_kwargs:
+        generate_kwargs = {}
+    r = pipeline(text, **generate_kwargs)
+    return r['audio'], r['sampling_rate']

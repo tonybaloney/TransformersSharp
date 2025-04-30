@@ -123,5 +123,17 @@ namespace TransformsSharp.Tests
             Assert.InRange(result.First().Box.XMax, 0, 224);
             Assert.InRange(result.First().Box.YMax, 0, 224);
         }
+
+        [Fact]
+        public void TextToAudioPipeline_Generate()
+        {
+            var pipeline = TextToAudioPipeline.FromModel("suno/bark-small");
+            var text = "Hello, this is a test.";
+            var audioResult = pipeline.Generate(text);
+            Assert.False(audioResult.Audio.IsEmpty);
+            Assert.True(audioResult.Audio.Length > 0);
+
+            Assert.Equal(24000, audioResult.SamplingRate);
+        }
     }
 }
