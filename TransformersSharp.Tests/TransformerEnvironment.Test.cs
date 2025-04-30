@@ -1,7 +1,6 @@
-using TransformersSharp;
 using TransformersSharp.Tokenizers;
 
-namespace TransformsSharp.Tests
+namespace TransformersSharp.Tests
 {
     public class TransformerEnvironmentTest
     {

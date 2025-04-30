@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.AI;
-using System.ComponentModel;
 
 namespace TransformersSharp.MEAI;
 
@@ -53,13 +52,19 @@ public class TextGenerationPipelineChatClient : IChatClient
         }, cancellationToken);
     }
 
-    public object? GetService(Type serviceType, object? serviceKey = null)
-    {
-        throw new NotImplementedException();
-    }
+    public object? GetService(Type serviceType, object? serviceKey = null) =>
+        serviceType is null ? throw new ArgumentNullException(nameof(serviceType)) :
+        serviceKey is not null ? null :
+        serviceType.IsInstanceOfType(this) ? this :
+        serviceType == typeof(TextGenerationPipeline) ? this.TextGenerationPipeline :
+        null;
 
-    public IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
-         throw new NotImplementedException(); 
+        var response = await GetResponseAsync(messages, options, cancellationToken).ConfigureAwait(false);
+        foreach (var update in response.ToChatResponseUpdates())
+        {
+            yield return update;
+        }
     }
 }
