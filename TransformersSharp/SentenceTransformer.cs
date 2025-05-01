@@ -21,6 +21,12 @@ public class SentenceTransformer(PyObject transformerObject) : IEmbeddingGenerat
         transformerObject.Dispose();
     }
 
+    public float[] Generate(string sentence)
+    {
+        var result = TransformerEnvironment.SentenceTransformersWrapper.EncodeSentence(transformerObject, sentence);
+        return result.AsFloatReadOnlySpan().ToArray();
+    }
+
     public Task<GeneratedEmbeddings<Embedding<float>>> GenerateAsync(IEnumerable<string> values, EmbeddingGenerationOptions? options = null, CancellationToken cancellationToken = default)
     {
         return Task.Run(() =>

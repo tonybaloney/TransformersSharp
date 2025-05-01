@@ -28,4 +28,17 @@ public class SentenceTransformerTests
             Assert.Equal(768, embedding.Vector.Length); // Assuming the model produces 768-dimensional embeddings
         });
     }
+
+    [Fact]
+    public void SentenceTransformer_ShouldGenerateSingleEmbedding()
+    {
+        var transformer = SentenceTransformer.FromModel("nomic-ai/nomic-embed-text-v1.5", trustRemoteCode: true);
+        Assert.NotNull(transformer);
+        Assert.IsType<SentenceTransformer>(transformer);
+        var sentence = "The quick brown fox jumps over the lazy dog.";
+        var embedding = transformer.Generate(sentence);
+        Assert.NotNull(embedding);
+        Assert.IsType<float[]>(embedding);
+        Assert.Equal(768, embedding.Length); // Assuming the model produces 768-dimensional embeddings
+    }
 }
