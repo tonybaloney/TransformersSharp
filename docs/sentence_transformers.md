@@ -1,6 +1,6 @@
 # Sentence Transformer
 
-The `TransformersSharp.SentenceTransformer` class provides a high-level interface for generating sentence embeddings using pre-trained models from the Hugging Face Transformers library (`sentence_transformers`). It simplifies the process of embedding text by handling preprocessing, model inference, and tensor conversion.
+The `TransformersSharp.SentenceTransformer` class provides a high-level interface for generating sentence embeddings using pre-trained models from over [10,000 Sentence Similarity models](https://huggingface.co/models?pipeline_tag=sentence-similarity) using Hugging Face Transformers library (`sentence_transformers`). It simplifies the process of embedding text by handling preprocessing, model inference, and tensor conversion.
 
 It is implemented as a `Microsoft.AI.Extensions.IEmbeddingGenerator<string, Embedding<float>>` and can be used to generate embeddings for sentences or text inputs.
 
