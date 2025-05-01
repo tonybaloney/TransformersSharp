@@ -37,7 +37,7 @@ for result in results:
 Is equivalent to:
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextGenerationPipeline.FromModel("Qwen/Qwen2.5-0.5B", TorchDtype.BFloat16);
 var messages = new List<IReadOnlyDictionary<string, string>>

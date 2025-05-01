@@ -23,7 +23,7 @@ The `TextClassificationPipeline` class in `TransformersSharp` provides methods t
 ### Classifying a Single Input
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextClassificationPipeline.FromModel("distilbert-base-uncased-finetuned-sst-2-english");
 var result = pipeline.Classify("I love programming!");
@@ -47,7 +47,7 @@ for item in result:
 ### Classifying Batch Inputs
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextClassificationPipeline.FromModel("distilbert-base-uncased-finetuned-sst-2-english");
 var inputs = new List<string> { "I love programming!", "I hate bugs!" };
@@ -77,7 +77,7 @@ The `TextClassificationPipeline` class provides access to the associated tokeniz
 ### Example: Accessing the Tokenizer
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextClassificationPipeline.FromModel("distilbert-base-uncased-finetuned-sst-2-english");
 var tokenizer = pipeline.Tokenizer;

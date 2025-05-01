@@ -20,7 +20,7 @@ The tokenizer pipeline in the Hugging Face Transformers SDK involves several ste
 [Text Generation Pipelines](pipelines/text_generation.md) include a tokenizer. You can access the tokenizer that comes with the model using the `Tokenizer` property on the `TextGenerationPipeline` class:
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextGenerationPipeline.FromModel("facebook/opt-125m");
 ReadOnlySpan<long> inputIds = pipeline.Tokenizer.Tokenize("How many helicopters can a human eat in one sitting?");
