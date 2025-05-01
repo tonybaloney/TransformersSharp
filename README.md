@@ -15,11 +15,11 @@ This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes)
 - Tokenizer API based on [`PreTrainedTokenizerBase`](https://huggingface.co/docs/transformers/v4.51.3/en/internal/tokenization_utils#transformers.PreTrainedTokenizerBase)
 - Tokenizer shim to the [Microsoft.ML.Tokenizers](https://learn.microsoft.com/dotnet/api/microsoft.ml.tokenizers.tokenizer?view=ml-dotnet-preview) base class
 - Utility classes to access pipelines like:
-    - [Text Generation Pipeline (`TextGenerationPipeline`)](pipelines/text_generation.md)
-    - [Text Classification Pipeline (`TextClassificationPipeline)](pipelines/text_classification.md)
-    - [Image Classification Pipeline(`ImageClassificationPipeline`)](pipelines/image_classification.md)
-    - [Object Detection Pipeline (`ObjectDetectionPipeline`)](pipelines/object_detection.md)
-- [Sentence Transformers (Embeddings)](sentence_transformers.md)
+    - [Text Generation Pipeline (`TextGenerationPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/text_generation)
+    - [Text Classification Pipeline (`TextClassificationPipeline)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/text_classification)
+    - [Image Classification Pipeline(`ImageClassificationPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/image_classification)
+    - [Object Detection Pipeline (`ObjectDetectionPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/object_detection)
+- [Sentence Transformers (Embeddings)](https://tonybaloney.github.io/TransformersSharp/docs/sentence_transformers)
 
 ## Usage
 
