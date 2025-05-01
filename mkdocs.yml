@@ -24,7 +24,9 @@ theme:
     - navigation.instant
     - navigation.footer
     - content.code.copy
-    - navigation.tabs.sticky 
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate
     - content.tabs.link
 
   # Change Font: https://squidfunk.github.io/mkdocs-material/setup/changing-the-fonts/?h=fonts
