@@ -1,8 +1,10 @@
 # Sentence Transformer
 
-The `TransformersSharp.SentenceTransformer` class provides a high-level interface for generating sentence embeddings using pre-trained models from the Hugging Face Transformers library. It simplifies the process of embedding text by handling preprocessing, model inference, and tensor conversion.
+The `TransformersSharp.SentenceTransformer` class provides a high-level interface for generating sentence embeddings using pre-trained models from the Hugging Face Transformers library (`sentence_transformers`). It simplifies the process of embedding text by handling preprocessing, model inference, and tensor conversion.
 
 It is implemented as a `Microsoft.AI.Extensions.IEmbeddingGenerator<string, Embedding<float>>` and can be used to generate embeddings for sentences or text inputs.
+
+Additionally, the `float[] Generate(string input)` method is available for generating embeddings for a single input string.
 
 ## What is a Sentence Transformer?
 
@@ -22,6 +24,17 @@ A sentence transformer is designed to generate dense vector representations (emb
 ## Using the SentenceTransformer Class
 
 The `SentenceTransformer` class in `TransformersSharp` provides methods to generate embeddings for sentences. Below are examples of how to use it.
+
+### Simple Usage
+
+```csharp
+using TransformersSharp;
+
+var transformer = SentenceTransformer.FromModel("nomic-ai/nomic-embed-text-v1.5", trustRemoteCode: true);
+var sentence = "The quick brown fox jumps over the lazy dog.";
+float[] embedding = transformer.Generate(sentence);
+Console.WriteLine($"Embedding Length: {embedding}");
+```
 
 ### Generating Embeddings for Sentences
 
