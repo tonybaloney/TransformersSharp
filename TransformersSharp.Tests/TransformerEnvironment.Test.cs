@@ -145,7 +145,7 @@ namespace TransformersSharp.Tests
             var result = pipeline.Transcribe(audioPath);
             Assert.NotNull(result);
             Assert.NotEmpty(result);
-            Assert.Contains("parrots", result, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("stew for dinner", result, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
