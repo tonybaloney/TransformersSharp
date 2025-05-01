@@ -1,7 +1,7 @@
 ﻿using CSnakes.Runtime.Python;
 using TransformersSharp.Tokenizers;
 
-namespace TransformersSharp
+namespace TransformersSharp.Pipelines
 {
     public class Pipeline
     {

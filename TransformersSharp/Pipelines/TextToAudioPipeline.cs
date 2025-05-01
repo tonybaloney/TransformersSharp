@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.HighPerformance;
 using CSnakes.Runtime.Python;
 
-namespace TransformersSharp;
+namespace TransformersSharp.Pipelines;
 
 public class TextToAudioPipeline : Pipeline
 {

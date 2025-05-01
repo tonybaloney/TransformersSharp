@@ -1,6 +1,7 @@
 ﻿using CSnakes.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TransformersSharp.Pipelines;
 
 namespace TransformersSharp
 {
@@ -33,6 +34,7 @@ namespace TransformersSharp
         }
 
         internal static ITransformersWrapper TransformersWrapper => Env.TransformersWrapper();
+        internal static ISentenceTransformersWrapper SentenceTransformersWrapper => Env.SentenceTransformersWrapper();
 
         /// <summary>
         /// Login to Huggingface with a token.

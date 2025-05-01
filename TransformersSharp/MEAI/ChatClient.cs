@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.AI;
-using System.ComponentModel;
+using TransformersSharp.Pipelines;
 
 namespace TransformersSharp.MEAI;
 
@@ -20,18 +20,6 @@ public class TextGenerationPipelineChatClient : IChatClient
         // Nothing to do yet.
     }
 
-    private static ChatRole GetChatRole(string role)
-    {
-        return role switch
-        {
-            "user" => ChatRole.User,
-            "assistant" => ChatRole.Assistant,
-            "system" => ChatRole.System,
-            "tool" => ChatRole.Tool,
-            _ => throw new ArgumentException($"Unknown chat role: {role}")
-        };
-    }
-
     public Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
         return Task.Run(() =>
@@ -48,18 +36,24 @@ public class TextGenerationPipelineChatClient : IChatClient
                 temperature: options?.Temperature,
                 stopStrings: options?.StopSequences?.AsReadOnly()
                 );
-            var responseMessages = result.Select(message => new ChatMessage(GetChatRole(message["role"]), message["content"])).ToList();
+            var responseMessages = result.Select(message => new ChatMessage(new ChatRole(message["role"]), message["content"])).ToList();
             return new ChatResponse(responseMessages);
         }, cancellationToken);
     }
 
-    public object? GetService(Type serviceType, object? serviceKey = null)
-    {
-        throw new NotImplementedException();
-    }
+    public object? GetService(Type serviceType, object? serviceKey = null) =>
+        serviceType is null ? throw new ArgumentNullException(nameof(serviceType)) :
+        serviceKey is not null ? null :
+        serviceType.IsInstanceOfType(this) ? this :
+        serviceType == typeof(TextGenerationPipeline) ? this.TextGenerationPipeline :
+        null;
 
-    public IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
-         throw new NotImplementedException(); 
+        var response = await GetResponseAsync(messages, options, cancellationToken).ConfigureAwait(false);
+        foreach (var update in response.ToChatResponseUpdates())
+        {
+            yield return update;
+        }
     }
 }

@@ -23,7 +23,7 @@ The `TextToAudioPipeline` class in `TransformersSharp` provides methods to gener
 ### Generating Audio from Text
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextToAudioPipeline.FromModel("suno/bark-small");
 var text = "Hello, this is a test.";
@@ -49,7 +49,7 @@ The `TextToAudioPipeline` class provides the generated audio as a `ReadOnlySpan2
 ### Example: Accessing Audio Data
 
 ```csharp
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 
 var pipeline = TextToAudioPipeline.FromModel("suno/bark-small");
 var text = "Hello, this is a test.";

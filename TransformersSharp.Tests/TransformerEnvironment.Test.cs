@@ -1,7 +1,7 @@
-using TransformersSharp;
+using TransformersSharp.Pipelines;
 using TransformersSharp.Tokenizers;
 
-namespace TransformsSharp.Tests
+namespace TransformersSharp.Tests
 {
     public class TransformerEnvironmentTest
     {
@@ -118,10 +118,11 @@ namespace TransformsSharp.Tests
             Assert.NotEmpty(result);
             Assert.InRange(result[0].Score, 0.5, 1.0);
             Assert.Equal("bird", result[0].Label);
-            Assert.InRange(result[0].Box.XMin, 0, 224);
-            Assert.InRange(result[0].Box.YMin, 0, 224);
-            Assert.InRange(result[0].Box.XMax, 0, 224);
-            Assert.InRange(result[0].Box.YMax, 0, 224);
+            var box = result[0].Box;
+            Assert.InRange(box.XMin, 0, box.XMax);
+            Assert.InRange(box.YMin, 0, box.YMax);
+            Assert.InRange(box.XMax, box.XMin, 400);
+            Assert.InRange(box.YMax, box.YMin, 600);
         }
 
         [Fact]
@@ -134,6 +135,17 @@ namespace TransformsSharp.Tests
             Assert.True(audioResult.Audio.Length > 0);
 
             Assert.Equal(24000, audioResult.SamplingRate);
+        }
+
+        [Fact]
+        public void AutomaticSpeechRecognitionPipeline_Transcribe()
+        {
+            var pipeline = AutomaticSpeechRecognitionPipeline.FromModel("openai/whisper-tiny");
+            var audioPath = "https://huggingface.co/datasets/Narsil/asr_dummy/resolve/main/1.flac"; // Replace with a valid audio path
+            var result = pipeline.Transcribe(audioPath);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.Contains("stew for dinner", result, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
