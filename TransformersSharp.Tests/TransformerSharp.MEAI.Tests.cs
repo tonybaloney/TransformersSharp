@@ -36,4 +36,30 @@ public class TransformerSharpMEAITests
             Assert.NotEmpty(update.Text);
         }
     }
+
+    [Fact]
+    public async Task TestSpeechToTextClient()
+    {
+        var speechClient = SpeechToTextClient.FromModel("openai/whisper-tiny");
+        using var audioStream = new MemoryStream(File.ReadAllBytes("sample.flac"));
+        var response = await speechClient.GetTextAsync(audioStream);
+        
+        Assert.NotNull(response);
+        Assert.NotEmpty(response.Text);
+        Assert.Contains("stew for dinner", response.Text, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task TestSpeechToTextClientStreaming()
+    {
+        var speechClient = SpeechToTextClient.FromModel("openai/whisper-tiny");
+        using var audioStream = new MemoryStream(File.ReadAllBytes("sample.flac"));
+        var response = speechClient.GetStreamingTextAsync(audioStream);
+        await foreach (var update in response)
+        {
+            Assert.NotNull(update);
+            Assert.NotEmpty(update.Text);
+            Assert.Contains("stew for dinner", update.Text, StringComparison.OrdinalIgnoreCase);
+        }
+    }
 }

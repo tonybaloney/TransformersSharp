@@ -161,3 +161,10 @@ def invoke_automatic_speech_recognition_pipeline(pipeline: Pipeline, audio: str)
     """
     r = pipeline(audio, return_timestamps=False)
     return r['text']
+
+def invoke_automatic_speech_recognition_pipeline_from_bytes(pipeline: Pipeline, audio: bytes) -> str:
+    """
+    Invoke an automatic speech recognition pipeline.
+    """
+    r = pipeline(audio, return_timestamps=False)
+    return r['text']

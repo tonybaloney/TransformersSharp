@@ -27,4 +27,9 @@ public class AutomaticSpeechRecognitionPipeline : Pipeline
     {
         return TransformerEnvironment.TransformersWrapper.InvokeAutomaticSpeechRecognitionPipeline(PipelineObject, audioPath);
     }
+
+    public string Transcribe(byte[] audio)
+    {
+        return TransformerEnvironment.TransformersWrapper.InvokeAutomaticSpeechRecognitionPipelineFromBytes(PipelineObject, audio);
+    }
 }
