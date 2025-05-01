@@ -100,3 +100,45 @@ audio_path = "/path/to/local/audio/file.flac"  # Replace with a valid local file
 transcription = pipeline(audio_path)
 print(f"Transcription: {transcription}")
 ```
+
+## Using the ASR Pipeline with the SpeechToTextClient (Microsoft.Extensions.AI.ISpeechToTextClient)
+
+The `SpeechToTextClient` class in the `TransformersSharp.MEAI` namespace provides a convenient way to use the Automatic Speech Recognition (ASR) pipeline for transcribing audio. It simplifies the process of working with audio streams and supports both synchronous and streaming transcription.
+
+### Transcribing Audio from a File
+
+```csharp
+using TransformersSharp.MEAI;
+
+var speechClient = SpeechToTextClient.FromModel("openai/whisper-tiny");
+using var audioStream = new MemoryStream(File.ReadAllBytes("sample.flac"));
+var response = await speechClient.GetTextAsync(audioStream);
+
+Console.WriteLine($"Transcription: {response.Text}");
+```
+
+**Equivalent Python Code:**
+
+```python
+from transformers import pipeline
+
+pipeline = pipeline("automatic-speech-recognition", model="openai/whisper-tiny")
+audio_path = "sample.flac"  # Replace with a valid local file path
+transcription = pipeline(audio_path)
+print(f"Transcription: {transcription}")
+```
+
+### Streaming Transcription
+
+The `SpeechToTextClient` also supports streaming transcription, which is useful for processing large audio files or real-time audio streams. Although few (if any) models support streaming, the API is designed to handle it.
+
+```csharp
+using TransformersSharp.MEAI;
+
+var speechClient = SpeechToTextClient.FromModel("openai/whisper-tiny");
+using var audioStream = new MemoryStream(File.ReadAllBytes("sample.flac"));
+await foreach (var update in speechClient.GetStreamingTextAsync(audioStream))
+{
+    Console.WriteLine($"Partial Transcription: {update.Text}");
+}
+```
