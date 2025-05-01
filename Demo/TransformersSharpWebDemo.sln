@@ -1,0 +1,48 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36015.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformersSharpWebDemo.AppHost", "TransformersSharpWebDemo.AppHost\TransformersSharpWebDemo.AppHost.csproj", "{263CA371-B237-4632-B7C9-904AE2F39213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformersSharpWebDemo.ServiceDefaults", "TransformersSharpWebDemo.ServiceDefaults\TransformersSharpWebDemo.ServiceDefaults.csproj", "{0EC6C554-249B-32C1-2A43-900A8572698F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformersSharpWebDemo.ApiService", "TransformersSharpWebDemo.ApiService\TransformersSharpWebDemo.ApiService.csproj", "{ABA33454-D3F7-9AD9-5561-000E90B29434}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformersSharpWebDemo.Web", "TransformersSharpWebDemo.Web\TransformersSharpWebDemo.Web.csproj", "{BE7B9D80-DBDE-3700-62C6-05A86274A03B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformersSharp", "..\TransformersSharp\TransformersSharp.csproj", "{CCC4ADCA-B4D0-372B-50AF-5C245DC88AEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{263CA371-B237-4632-B7C9-904AE2F39213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263CA371-B237-4632-B7C9-904AE2F39213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263CA371-B237-4632-B7C9-904AE2F39213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263CA371-B237-4632-B7C9-904AE2F39213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC6C554-249B-32C1-2A43-900A8572698F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC6C554-249B-32C1-2A43-900A8572698F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC6C554-249B-32C1-2A43-900A8572698F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC6C554-249B-32C1-2A43-900A8572698F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA33454-D3F7-9AD9-5561-000E90B29434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA33454-D3F7-9AD9-5561-000E90B29434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA33454-D3F7-9AD9-5561-000E90B29434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA33454-D3F7-9AD9-5561-000E90B29434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE7B9D80-DBDE-3700-62C6-05A86274A03B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7B9D80-DBDE-3700-62C6-05A86274A03B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7B9D80-DBDE-3700-62C6-05A86274A03B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7B9D80-DBDE-3700-62C6-05A86274A03B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC4ADCA-B4D0-372B-50AF-5C245DC88AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC4ADCA-B4D0-372B-50AF-5C245DC88AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC4ADCA-B4D0-372B-50AF-5C245DC88AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC4ADCA-B4D0-372B-50AF-5C245DC88AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65D22B45-2372-428D-83CA-DEE1183C9D35}
+	EndGlobalSection
+EndGlobal
