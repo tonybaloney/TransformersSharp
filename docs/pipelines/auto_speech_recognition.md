@@ -16,6 +16,30 @@ An automatic speech recognition (ASR) pipeline is designed to convert spoken lan
 - **Flexible Input**: Supports both local audio files and URLs.
 - **High Accuracy**: Provides accurate transcriptions for various languages and accents.
 
+## Installing ffmpeg
+
+To use the `AutomaticSpeechRecognitionPipeline`, you need to have `ffmpeg` installed on your system. 
+
+You can install it on Windows using `winget`:
+
+```bash
+winget install ffmpeg
+```
+
+You'll probably need to restart your terminal or IDE after installing `ffmpeg` to ensure it's available in your system's PATH.
+
+On Linux, you can install it using your package manager. For example, on Ubuntu:
+
+```bash
+sudo apt-get install ffmpeg
+```
+
+On macOS, you can use Homebrew:
+
+```bash
+brew install ffmpeg
+```
+
 ## Using the AutomaticSpeechRecognitionPipeline Class
 
 The `AutomaticSpeechRecognitionPipeline` class in `TransformersSharp` provides methods to transcribe audio files. Below are examples of how to use it.
