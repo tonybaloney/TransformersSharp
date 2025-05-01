@@ -11,6 +11,7 @@ nav:
     - Image Classification: pipelines/image_classification.md
     - Object Detection: pipelines/object_detection.md
     - Text to Audio: pipelines/text_to_audio.md
+    - Automatic Speech Recognition: pipelines/auto_speech_recognition.md
 
 plugins:
   - glightbox

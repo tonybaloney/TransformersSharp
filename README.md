@@ -19,6 +19,7 @@ This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes)
     - [Text Classification Pipeline (`TextClassificationPipeline)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/text_classification)
     - [Image Classification Pipeline(`ImageClassificationPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/image_classification)
     - [Object Detection Pipeline (`ObjectDetectionPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/object_detection)
+    - [Automatic Speech Recognition (`AutomaticSpeechRecognitionPipeline`)](https://tonybaloney.github.io/TransformersSharp/docs/pipelines/auto_speech_recognition)
 - [Sentence Transformers (Embeddings)](https://tonybaloney.github.io/TransformersSharp/docs/sentence_transformers)
 
 ## Usage
