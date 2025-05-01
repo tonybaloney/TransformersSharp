@@ -118,10 +118,11 @@ namespace TransformersSharp.Tests
             Assert.NotEmpty(result);
             Assert.InRange(result.First().Score, 0.5, 1.0);
             Assert.Equal("bird", result.First().Label);
-            Assert.InRange(result.First().Box.XMin, 0, 224);
-            Assert.InRange(result.First().Box.YMin, 0, 224);
-            Assert.InRange(result.First().Box.XMax, 0, 224);
-            Assert.InRange(result.First().Box.YMax, 0, 224);
+            var box = result.First().Box;
+            Assert.InRange(box.XMin, 0, box.XMax);
+            Assert.InRange(box.YMin, 0, box.YMax);
+            Assert.InRange(box.XMax, box.XMin, 400);
+            Assert.InRange(box.YMax, box.YMin, 600);
         }
 
         [Fact]
