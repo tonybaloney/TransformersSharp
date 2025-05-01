@@ -34,6 +34,7 @@ namespace TransformersSharp
         }
 
         internal static ITransformersWrapper TransformersWrapper => Env.TransformersWrapper();
+        internal static ISentenceTransformersWrapper SentenceTransformersWrapper => Env.SentenceTransformersWrapper();
 
         /// <summary>
         /// Login to Huggingface with a token.
