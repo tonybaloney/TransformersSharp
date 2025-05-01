@@ -19,6 +19,7 @@ This project was created using [CSnakes](https://github.com/tonybaloney/CSnakes)
     - [Text Classification Pipeline (`TextClassificationPipeline)](pipelines/text_classification.md)
     - [Image Classification Pipeline(`ImageClassificationPipeline`)](pipelines/image_classification.md)
     - [Object Detection Pipeline (`ObjectDetectionPipeline`)](pipelines/object_detection.md)
+- [Sentence Transformers (Embeddings)](sentence_transformers.md)
 
 ## Usage
 

@@ -3,6 +3,7 @@ site_name: TransformersSharp
 nav:
   - Introduction: index.md
   - Tokenizers: tokenizers.md
+  - Embeddings (Sentence Transformers): sentence_transformers.md
   - Pipelines:
     - Introduction: pipelines/index.md
     - Text Classification: pipelines/text_classification.md
