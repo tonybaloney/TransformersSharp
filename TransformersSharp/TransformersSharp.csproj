@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSnakes.Runtime" Version="1.0.32-beta.187" />
+    <PackageReference Include="CSnakes.Runtime" Version="1.0.33" />
     <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.4.3-preview.1.25230.7" />
     <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.0-preview.1.25127.4" />
   </ItemGroup>
