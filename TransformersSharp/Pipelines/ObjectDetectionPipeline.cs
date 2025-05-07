@@ -4,20 +4,9 @@ namespace TransformersSharp.Pipelines;
 
 public class ObjectDetectionPipeline: Pipeline
 {
-    public struct DetectionBox
-    {
-        public int XMin { get; set; }
-        public int YMin { get; set; }
-        public int XMax { get; set; }
-        public int YMax { get; set; }
-    }
+    public readonly record struct DetectionBox(int XMin, int YMin, int XMax, int YMax);
+    public readonly record struct DetectionResult(string Label, double Score, DetectionBox Box);
 
-    public struct DetectionResult
-    {
-        public string Label { get; set; }
-        public float Score { get; set; }
-        public DetectionBox Box { get; set; }
-    }
     internal ObjectDetectionPipeline(PyObject pipelineObject) : base(pipelineObject)
     {
     }
@@ -33,30 +22,22 @@ public class ObjectDetectionPipeline: Pipeline
     }
     public IEnumerable<DetectionResult> Detect(string path, double threshold = 0.5, double? timeout = null)
     {
-        var results = TransformerEnvironment.TransformersWrapper.InvokeObjectDetectionPipeline(PipelineObject, path, threshold, timeout);
-        return results.Select(r => new DetectionResult
-        {
-            Label = r["label"].As<string>(),
-            Score = r["score"].As<float>(),
-            Box = r["box"].As<IReadOnlyDictionary<string, int>>().Aggregate(new DetectionBox(), (acc, kvp) =>
+        IEnumerable<(string Label, double Score, (long XMin, long YMin, long XMax, long YMax) Box)> results =
+            TransformerEnvironment.TransformersWrapper.InvokeObjectDetectionPipeline(PipelineObject, path, threshold, timeout);
+
+        return
+            from e in results
+            select new DetectionResult
             {
-                switch (kvp.Key)
+                Label = e.Label,
+                Score = e.Score,
+                Box = checked(new()
                 {
-                    case "xmin":
-                        acc.XMin = kvp.Value;
-                        break;
-                    case "ymin":
-                        acc.YMin = kvp.Value;
-                        break;
-                    case "xmax":
-                        acc.XMax = kvp.Value;
-                        break;
-                    case "ymax":
-                        acc.YMax = kvp.Value;
-                        break;
-                }
-                return acc;
-            })
-        });
+                    XMin = (int)e.Box.XMin,
+                    YMin = (int)e.Box.YMin,
+                    XMax = (int)e.Box.XMax,
+                    YMax = (int)e.Box.YMax,
+                })
+            };
     }
 }

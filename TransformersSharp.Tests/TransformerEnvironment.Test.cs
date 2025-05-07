@@ -113,12 +113,12 @@ namespace TransformersSharp.Tests
         {
             var pipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
             var imagePath = "https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png"; // Replace with a valid image path
-            var result = pipeline.Detect(imagePath);
+            var result = pipeline.Detect(imagePath).ToArray();
             Assert.NotNull(result);
             Assert.NotEmpty(result);
-            Assert.InRange(result.First().Score, 0.5, 1.0);
-            Assert.Equal("bird", result.First().Label);
-            var box = result.First().Box;
+            Assert.InRange(result[0].Score, 0.5, 1.0);
+            Assert.Equal("bird", result[0].Label);
+            var box = result[0].Box;
             Assert.InRange(box.XMin, 0, box.XMax);
             Assert.InRange(box.YMin, 0, box.YMax);
             Assert.InRange(box.XMax, box.XMin, 400);
