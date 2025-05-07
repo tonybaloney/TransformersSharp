@@ -1,0 +1,50 @@
+﻿@page "/objectdetection"
+@using static TransformersSharp.Pipelines.ObjectDetectionPipeline
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
+@inject DetectionApiClient DetectionApi
+
+<PageTitle>Object Detection</PageTitle>
+
+<style>
+    .container {
+        position: relative;
+    }
+
+    .detection {
+        position: absolute;
+        color: white ;
+        border: 1px solid black
+    }
+</style>
+
+<h1>Object Detection Demo</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+@if (detectedObjects == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{            
+    <div class="container">
+        <img src="@detectedObjects.Url" alt="Image of birds">
+        @foreach (var o in detectedObjects.DetectionResults)
+        {
+            var h = o.Box.YMax - o.Box.YMin;
+            var w = o.Box.XMax - o.Box.XMin;
+           <div class="detection" style="left: @(o.Box.XMin)px; top: @(o.Box.YMin)px; height: @(h)px; width: @(w)px ;">@o.Label</div>
+        }
+    </div>
+}
+
+@code {
+    private DetectResponse? detectedObjects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        detectedObjects = await DetectionApi.GetObjectDetectionAsync("https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png");
+    }
+}

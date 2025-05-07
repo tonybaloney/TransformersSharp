@@ -1,5 +1,4 @@
-﻿from email.mime import image
-from typing import Any, Generator, Optional
+﻿from typing import Any, Generator, Optional
 from transformers import pipeline as TransformersPipeline, Pipeline, TextGenerationPipeline
 from huggingface_hub import login
 import torch
