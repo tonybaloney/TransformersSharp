@@ -30,8 +30,8 @@
 else
 {            
     <div class="container">
-        <img src="https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png" alt="Image of birds">
-        @foreach (var o in detectedObjects)
+        <img src="@detectedObjects.Url" alt="Image of birds">
+        @foreach (var o in detectedObjects.DetectionResults)
         {
             var h = o.Box.YMax - o.Box.YMin;
             var w = o.Box.XMax - o.Box.XMin;
@@ -41,10 +41,10 @@ else
 }
 
 @code {
-    private DetectionResult[]? detectedObjects;
+    private DetectResponse? detectedObjects;
 
     protected override async Task OnInitializedAsync()
     {
-        detectedObjects = await DetectionApi.GetObjectDetectionAsync();
+        detectedObjects = await DetectionApi.GetObjectDetectionAsync("https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png");
     }
 }
