@@ -1,3 +1,6 @@
+using TransformersSharp.Pipelines;
+using static TransformersSharp.Pipelines.ObjectDetectionPipeline;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -35,6 +38,17 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+var objectDetectionPipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
+
+app.MapPost("/detect", (DetectRequest r) =>
+{
+    var result = objectDetectionPipeline.Detect(r.Url);
+    return result;
+
+}).Accepts<DetectRequest>("application/json")
+    .Produces<DetectionResult>(StatusCodes.Status200OK)
+    .WithName("Detect");
+
 app.MapDefaultEndpoints();
 
 app.Run();
@@ -43,3 +57,8 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+record DetectRequest(string Url)
+{
+}
+
