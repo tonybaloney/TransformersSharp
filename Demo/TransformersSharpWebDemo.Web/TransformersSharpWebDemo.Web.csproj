@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TransformersSharp\TransformersSharp.csproj" />
     <ProjectReference Include="..\TransformersSharpWebDemo.ServiceDefaults\TransformersSharpWebDemo.ServiceDefaults.csproj" />
   </ItemGroup>
 
