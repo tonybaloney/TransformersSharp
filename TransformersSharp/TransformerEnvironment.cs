@@ -7,13 +7,13 @@ namespace TransformersSharp
 {
     public static class TransformerEnvironment
     {
-        private static IPythonEnvironment? _env;
-        private static IPythonEnvironment Env {
-        
-            get {
-                if (_env != null)
-                    return _env;
+        private static readonly IPythonEnvironment? _env;
+        private static readonly Lock _setupLock = new();
 
+        static TransformerEnvironment()
+        {
+            lock (_setupLock)
+            {
                 IHostBuilder builder = Host.CreateDefaultBuilder()
                     .ConfigureServices(services =>
                     {
@@ -59,9 +59,10 @@ namespace TransformersSharp
                 var app = builder.Build();
 
                 _env = app.Services.GetRequiredService<IPythonEnvironment>();
-                return _env;
             }
         }
+
+        private static IPythonEnvironment Env => _env ?? throw new InvalidOperationException("Python environment is not initialized..");
 
         internal static ITransformersWrapper TransformersWrapper => Env.TransformersWrapper();
         internal static ISentenceTransformersWrapper SentenceTransformersWrapper => Env.SentenceTransformersWrapper();
