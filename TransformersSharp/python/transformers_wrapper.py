@@ -157,14 +157,26 @@ def invoke_text_to_audio_pipeline(pipeline: Pipeline,
 
 def invoke_automatic_speech_recognition_pipeline(pipeline: Pipeline, audio: str) -> str:
     """
-    Invoke an automatic speech recognition pipeline.
+    Invoke an automatic speech recognition pipeline and return the result.
+
+    Args:
+        pipeline: The ASR pipeline object
+        audio: A local file path or a URL
+    Returns:
+        The text detected
     """
     r = pipeline(audio, return_timestamps=False)
     return r['text']
 
 def invoke_automatic_speech_recognition_pipeline_from_bytes(pipeline: Pipeline, audio: bytes) -> str:
     """
-    Invoke an automatic speech recognition pipeline.
+    Invoke an automatic speech recognition pipeline and return the result.
+    
+    Args:
+        pipeline: The ASR pipeline object
+        audio: The bytes of the audio file
+    Returns:
+        The text detected
     """
     r = pipeline(audio, return_timestamps=False)
     return r['text']

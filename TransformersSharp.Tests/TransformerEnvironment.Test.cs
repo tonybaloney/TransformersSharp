@@ -141,7 +141,7 @@ namespace TransformersSharp.Tests
         public void AutomaticSpeechRecognitionPipeline_Transcribe()
         {
             var pipeline = AutomaticSpeechRecognitionPipeline.FromModel("openai/whisper-tiny");
-            var audioPath = "https://huggingface.co/datasets/Narsil/asr_dummy/resolve/main/1.flac"; // Replace with a valid audio path
+            var audioPath = "https://huggingface.co/datasets/Narsil/asr_dummy/resolve/main/1.flac";
             var result = pipeline.Transcribe(audioPath);
             Assert.NotNull(result);
             Assert.NotEmpty(result);

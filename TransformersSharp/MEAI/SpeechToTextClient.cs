@@ -18,7 +18,7 @@ public class SpeechToTextClient : ISpeechToTextClient
 
     public void Dispose()
     {
-        // Nothing to do right now
+        // Nothing to do right now. ASR pipeline object will be collected via next GC pass anyway.
     }
 
     public object? GetService(Type serviceType, object? serviceKey = null) =>
