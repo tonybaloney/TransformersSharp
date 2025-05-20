@@ -21,7 +21,7 @@
 @if (!string.IsNullOrEmpty(transcription))
 {
     <h3>Transcription Result:</h3>
-    <pre>@transcription</pre>
+    <pre>@transcription?.Trim()</pre>
 }
 @if (!string.IsNullOrEmpty(error))
 {
