@@ -1,4 +1,8 @@
 ﻿@page "/transcribe"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
 @inject DemoApiClient demoApi
 
 <PageTitle>Transcribe Audio</PageTitle>
@@ -7,7 +11,7 @@
 
 <p>Select a FLAC audio file to transcribe using the backend API service.</p>
 
-<input type="file" @ref="fileInput" accept=".flac,audio/flac" @onchange="OnFileSelected" />
+<InputFile OnChange="OnFileSelected" />
 <button @onclick="UploadFile" disabled="@(!isFileSelected || isUploading)">Transcribe</button>
 
 @if (isUploading)
@@ -33,17 +37,25 @@
     private string? transcription;
     private string? error;
 
-    private void OnFileSelected(ChangeEventArgs e)
+    private void OnFileSelected(InputFileChangeEventArgs e)
     {
-        var files = (e.Value as Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs)?.GetMultipleFiles();
-        if (files != null && files.Count > 0)
+        var file = e.File;
+        if (file.ContentType != "audio/flac"){
+            error = "Must be flac";
+            selectedFile = null;
+            isFileSelected = false;
+            return;
+        }
+
+        if (file != null)
         {
-            selectedFile = files[0];
+            selectedFile = file;
             isFileSelected = true;
             error = null;
         }
         else
         {
+            error = "No files selected";
             selectedFile = null;
             isFileSelected = false;
         }
