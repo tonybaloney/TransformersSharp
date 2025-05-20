@@ -10,6 +10,8 @@ public class DemoApiClient(HttpClient httpClient)
         List<DetectionResult>? detectedObjects = [];
         var url = imageUrl;
         DetectRequest detectRequest = new(url); // Replace with actual URL
+        // Extend timeout because this can take a while
+        httpClient.Timeout = TimeSpan.FromMinutes(5);
         var response = await httpClient.PostAsJsonAsync("/detect", detectRequest, cancellationToken);
 
         foreach (var detectionResult in await response.Content.ReadFromJsonAsync<DetectionResult[]>(cancellationToken))
