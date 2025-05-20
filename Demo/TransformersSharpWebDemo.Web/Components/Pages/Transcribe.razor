@@ -1,0 +1,88 @@
+﻿@page "/transcribe"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
+@inject DemoApiClient demoApi
+
+<PageTitle>Transcribe Audio</PageTitle>
+
+<h1>ASR Demo</h1>
+
+<p>Select a FLAC audio file to transcribe using the backend API service.</p>
+
+<InputFile OnChange="OnFileSelected" />
+<button @onclick="UploadFile" disabled="@(!isFileSelected || isUploading)">Transcribe</button>
+
+@if (isUploading)
+{
+    <p><em>Uploading and transcribing...</em></p>
+}
+@if (!string.IsNullOrEmpty(transcription))
+{
+    <h3>Transcription Result:</h3>
+    <p>@transcription?.Trim()</p>
+}
+@if (!string.IsNullOrEmpty(error))
+{
+    <p style="color:red">@error</p>
+}
+
+@code {
+    private IBrowserFile? selectedFile;
+    private bool isFileSelected = false;
+    private bool isUploading = false;
+    private string? transcription;
+    private string? error;
+
+    private void OnFileSelected(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file.ContentType != "audio/flac"){
+            error = "Must be flac";
+            selectedFile = null;
+            isFileSelected = false;
+            return;
+        }
+
+        if (file != null)
+        {
+            selectedFile = file;
+            isFileSelected = true;
+            error = null;
+        }
+        else
+        {
+            error = "No files selected";
+            selectedFile = null;
+            isFileSelected = false;
+        }
+    }
+
+    private async Task UploadFile()
+    {
+        if (selectedFile == null)
+        {
+            error = "Please select a FLAC file.";
+            return;
+        }
+
+        isUploading = true;
+        transcription = null;
+        error = null;
+
+        try
+        {
+
+            transcription = await demoApi.GetTranscribeAsync(selectedFile);
+        }
+        catch (Exception ex)
+        {
+            error = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isUploading = false;
+        }
+    }
+}

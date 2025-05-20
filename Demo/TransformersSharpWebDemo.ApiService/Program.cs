@@ -1,3 +1,4 @@
+using TransformersSharp.MEAI;
 using TransformersSharp.Pipelines;
 using static TransformersSharp.Pipelines.ObjectDetectionPipeline;
 
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 var objectDetectionPipeline = ObjectDetectionPipeline.FromModel("facebook/detr-resnet-50");
+var speechToTextClient = SpeechToTextClient.FromModel("openai/whisper-small");
 
 app.MapPost("/detect", (DetectRequest r) =>
 {
@@ -33,6 +35,26 @@ app.MapPost("/detect", (DetectRequest r) =>
     .Produces<DetectionResult>(StatusCodes.Status200OK)
     .WithName("Detect");
 
+app.MapPost("/transcribe", async (HttpRequest request) =>
+{
+    if (!request.HasFormContentType)
+        return Results.BadRequest("File upload required");
+
+    var form = await request.ReadFormAsync();
+
+    string output = string.Empty;
+    foreach (var file in form.Files)
+    {
+        using var stream = file.OpenReadStream();
+        output += await speechToTextClient.GetTextAsync(stream);
+    }
+
+    return Results.Ok(output);
+
+}).Accepts<IFormFile>("multipart/form-data")
+    .Produces<string>(StatusCodes.Status200OK)
+    .WithName("Transcribe");
+
 app.MapDefaultEndpoints();
 
 app.Run();
@@ -40,4 +62,3 @@ app.Run();
 record DetectRequest(string Url)
 {
 }
-

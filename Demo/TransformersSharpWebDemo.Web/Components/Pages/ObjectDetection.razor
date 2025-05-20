@@ -3,7 +3,7 @@
 @attribute [StreamRendering(true)]
 @attribute [OutputCache(Duration = 5)]
 
-@inject DetectionApiClient DetectionApi
+@inject DemoApiClient DetectionApi
 
 <PageTitle>Object Detection</PageTitle>
 
@@ -14,14 +14,14 @@
 
     .detection {
         position: absolute;
-        color: white ;
-        border: 1px solid black
+        color: yellow;
+        border: 5px dotted red;
+        font-size: 3em;
+        font-family: "Arial";
     }
 </style>
 
 <h1>Object Detection Demo</h1>
-
-<p>This component demonstrates showing data loaded from a backend API service.</p>
 
 @if (detectedObjects == null)
 {
@@ -42,9 +42,10 @@ else
 
 @code {
     private DetectResponse? detectedObjects;
+    private const string url = "https://raw.githubusercontent.com/tonybaloney/TransformersSharp/refs/heads/asr/Demo/assets/dog.jpg";
 
     protected override async Task OnInitializedAsync()
     {
-        detectedObjects = await DetectionApi.GetObjectDetectionAsync("https://huggingface.co/datasets/Narsil/image_dummy/raw/main/parrots.png");
+        detectedObjects = await DetectionApi.GetObjectDetectionAsync(url);
     }
 }
