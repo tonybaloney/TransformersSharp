@@ -1,0 +1,78 @@
+﻿@page "/transcribe"
+@inject DemoApiClient demoApi
+
+<PageTitle>Transcribe Audio</PageTitle>
+
+<h1>ASR Demo</h1>
+
+<p>Select a FLAC audio file to transcribe using the backend API service.</p>
+
+<input type="file" @ref="fileInput" accept=".flac,audio/flac" @onchange="OnFileSelected" />
+<button @onclick="UploadFile" disabled="@(!isFileSelected || isUploading)">Transcribe</button>
+
+@if (isUploading)
+{
+    <p><em>Uploading and transcribing...</em></p>
+}
+@if (!string.IsNullOrEmpty(transcription))
+{
+    <h3>Transcription Result:</h3>
+    <pre>@transcription</pre>
+}
+@if (!string.IsNullOrEmpty(error))
+{
+    <p style="color:red">@error</p>
+}
+
+@code {
+
+    private ElementReference fileInput;
+    private IBrowserFile? selectedFile;
+    private bool isFileSelected = false;
+    private bool isUploading = false;
+    private string? transcription;
+    private string? error;
+
+    private void OnFileSelected(ChangeEventArgs e)
+    {
+        var files = (e.Value as Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs)?.GetMultipleFiles();
+        if (files != null && files.Count > 0)
+        {
+            selectedFile = files[0];
+            isFileSelected = true;
+            error = null;
+        }
+        else
+        {
+            selectedFile = null;
+            isFileSelected = false;
+        }
+    }
+
+    private async Task UploadFile()
+    {
+        if (selectedFile == null)
+        {
+            error = "Please select a FLAC file.";
+            return;
+        }
+
+        isUploading = true;
+        transcription = null;
+        error = null;
+
+        try
+        {
+
+            transcription = await demoApi.GetTranscribeAsync(selectedFile);
+        }
+        catch (Exception ex)
+        {
+            error = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isUploading = false;
+        }
+    }
+}
