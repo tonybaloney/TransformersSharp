@@ -1,4 +1,4 @@
-﻿from typing import Any, Generator, Optional
+﻿from typing import Any, Generator, Optional, overload
 from transformers import pipeline as TransformersPipeline, Pipeline, TextGenerationPipeline
 from huggingface_hub import login
 import torch
@@ -43,11 +43,11 @@ def huggingface_login(token: str) -> None:
     login(token=token)
 
 
+@overload
 def call_pipeline(pipeline: Pipeline, input: str, **kwargs) -> list[dict[str, Any]]:
-    return pipeline(input, **kwargs)
+    ...
 
-
-def call_pipeline_with_list(pipeline: Pipeline, input: list[str], **kwargs) -> list[dict[str, Any]]:
+def call_pipeline(pipeline: Pipeline, input: list[str], **kwargs) -> list[dict[str, Any]]:
     return pipeline(input, **kwargs)
 
 
@@ -154,6 +154,9 @@ def invoke_text_to_audio_pipeline(pipeline: Pipeline,
     r = pipeline(text, **generate_kwargs)
     return r['audio'], r['sampling_rate']
 
+@overload
+def invoke_automatic_speech_recognition_pipeline(pipeline: Pipeline, audio: bytes) -> str:
+    ...
 
 def invoke_automatic_speech_recognition_pipeline(pipeline: Pipeline, audio: str) -> str:
     """
@@ -162,19 +165,6 @@ def invoke_automatic_speech_recognition_pipeline(pipeline: Pipeline, audio: str)
     Args:
         pipeline: The ASR pipeline object
         audio: A local file path or a URL
-    Returns:
-        The text detected
-    """
-    r = pipeline(audio, return_timestamps=False)
-    return r['text']
-
-def invoke_automatic_speech_recognition_pipeline_from_bytes(pipeline: Pipeline, audio: bytes) -> str:
-    """
-    Invoke an automatic speech recognition pipeline and return the result.
-    
-    Args:
-        pipeline: The ASR pipeline object
-        audio: The bytes of the audio file
     Returns:
         The text detected
     """

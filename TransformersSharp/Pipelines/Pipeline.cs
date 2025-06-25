@@ -22,7 +22,7 @@ namespace TransformersSharp.Pipelines
 
         internal IReadOnlyList<IReadOnlyDictionary<string, PyObject>> RunPipeline(IReadOnlyList<string> inputs)
         {
-            return TransformerEnvironment.TransformersWrapper.CallPipelineWithList(PipelineObject, inputs);
+            return TransformerEnvironment.TransformersWrapper.CallPipeline(PipelineObject, inputs);
         }
 
         private PreTrainedTokenizerBase? _tokenizer = null;
