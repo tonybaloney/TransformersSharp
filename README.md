@@ -2,7 +2,7 @@
 
 ![Logo](docs/media/logo.png)
 
-A little wrapper for Hugging Face Transformers in C#. This is not a comprehensive 1:1 mapping of the whole HuggingFace [transformers](https://pypi.org/transformers) package, because the API is enormous.
+A little wrapper for Hugging Face Transformers in C#. This is not a comprehensive 1:1 mapping of the whole HuggingFace [transformers](https://pypi.org/project/transformers/) package, because the API is enormous.
 
 If you need a specific feature, toggle or pipeline API clone this repo and make adjustments.
 
